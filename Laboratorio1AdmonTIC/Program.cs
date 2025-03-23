@@ -18,7 +18,7 @@ builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.Require
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configure by Jorge Rodriguez
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
