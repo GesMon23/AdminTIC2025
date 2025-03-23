@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
         "projectName": "Laboratorio1AdmonTIC",
-        "projectPath": "C:\\Users\\User\\source\\repos\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
