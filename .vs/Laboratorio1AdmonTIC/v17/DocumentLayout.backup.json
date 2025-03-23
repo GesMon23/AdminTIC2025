@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Yorch\\Documents\\GitHub\\AdminTIC2025\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\yorch\\documents\\github\\admintic2025\\laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\yorch\\documents\\github\\admintic2025\\laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,25 +19,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Yorch\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Yorch\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-23T21:46:18.423Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Yorch\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
               "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Program.cs",
               "ToolTip": "C:\\Users\\Yorch\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
               "RelativeToolTip": "Laboratorio1AdmonTIC\\Program.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-23T21:33:09.019Z",
               "EditorCaption": ""
