@@ -22,9 +22,67 @@ namespace Laboratorio1AdmonTIC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.CategoriasProducto", b =>
                 {
-                    b.Property<Guid>("MunicipioId")
+                    b.Property<Guid>("CategoriaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoriaId");
+
+                    b.ToTable("CategoriasProducto");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Clientes", b =>
+                {
+                    b.Property<Guid>("EmpleadoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Apellidos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CUI")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NIT")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmpleadoId");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Departamento", b =>
+                {
+                    b.Property<Guid>("DepartamentoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -35,12 +93,189 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DepartamentoId");
+
+                    b.ToTable("Departamento");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
+                {
+                    b.Property<Guid>("EmpleadosId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Apellidos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Salario")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EmpleadosId");
+
+                    b.ToTable("Empleados");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.MetodosPago", b =>
+                {
+                    b.Property<Guid>("MetodoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TipoPago")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MetodoId");
+
+                    b.ToTable("MetodosPago");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
+                {
+                    b.Property<Guid>("MunicipioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("DepartamentoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MunicipioId");
 
+                    b.HasIndex("DepartamentoId");
+
                     b.ToTable("Municipios");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Productos", b =>
+                {
+                    b.Property<Guid>("ProductoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriasProductoCategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("PrecioCompra")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PrecioVenta")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("ProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProveedoresProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Stock")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StockMinimo")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UnidadMedida")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductoId");
+
+                    b.HasIndex("CategoriasProductoCategoriaId");
+
+                    b.HasIndex("ProveedoresProveedorId");
+
+                    b.ToTable("Productos");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Proveedores", b =>
+                {
+                    b.Property<Guid>("ProveedorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProveedorId");
+
+                    b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.TiposMovimiento", b =>
+                {
+                    b.Property<Guid>("TipoMovimientoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TipoMovimiento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoMovimientoId");
+
+                    b.ToTable("TiposMovimiento");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -243,6 +478,34 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Departamento", "Departamento")
+                        .WithMany()
+                        .HasForeignKey("DepartamentoId");
+
+                    b.Navigation("Departamento");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Productos", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.CategoriasProducto", "CategoriasProducto")
+                        .WithMany()
+                        .HasForeignKey("CategoriasProductoCategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Proveedores", "Proveedores")
+                        .WithMany()
+                        .HasForeignKey("ProveedoresProveedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoriasProducto");
+
+                    b.Navigation("Proveedores");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
