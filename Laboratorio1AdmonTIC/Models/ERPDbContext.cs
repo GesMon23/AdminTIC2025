@@ -17,8 +17,19 @@ namespace Laboratorio1AdmonTIC.Models
 		public DbSet<Departamento> Departamento { get; set; }
 
 		public DbSet<Empleados> Empleados { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-		public DbSet<MetodosPago> MetodosPago { get; set; }
+            // Relación uno a uno entre Empleado y ApplicationUser
+            modelBuilder.Entity<Empleados>()
+                .HasOne(e => e.User) // Un Empleado tiene un User
+                .WithOne(u => u.Empleados) // Un User tiene un Empleado
+                .HasForeignKey<Empleados>(e => e.UserId) // Especificamos que UserId es la FK
+                .OnDelete(DeleteBehavior.Restrict); // Opcional: controlar la eliminación (en caso de necesidad)
+        }
+
+        public DbSet<MetodosPago> MetodosPago { get; set; }
 
 		public DbSet<Clientes> Clientes { get; set; }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Laboratorio1AdmonTIC.Migrations
 {
     [DbContext(typeof(ERPDbContext))]
-    [Migration("20250403010149_prod")]
-    partial class prod
+    [Migration("20250406024653_RelacionEmpleadosUsuario")]
+    partial class RelacionEmpleadosUsuario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,7 +134,14 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("EmpleadosId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Empleados");
                 });
@@ -183,6 +190,56 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.ToTable("Municipios");
                 });
 
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Productos", b =>
+                {
+                    b.Property<Guid>("ProductoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriasProductoCategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("PrecioCompra")
+                        .HasColumnType("real");
+
+                    b.Property<float>("PrecioVenta")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("ProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProveedoresProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Stock")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StockMinimo")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UnidadMedida")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductoId");
+
+                    b.HasIndex("CategoriasProductoCategoriaId");
+
+                    b.HasIndex("ProveedoresProveedorId");
+
+                    b.ToTable("Productos");
+                });
+
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Proveedores", b =>
                 {
                     b.Property<Guid>("ProveedorId")
@@ -211,6 +268,24 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasKey("ProveedorId");
 
                     b.ToTable("Proveedores");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.TiposMovimiento", b =>
+                {
+                    b.Property<Guid>("TipoMovimientoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TipoMovimiento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoMovimientoId");
+
+                    b.ToTable("TiposMovimiento");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -277,6 +352,11 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -328,6 +408,10 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -415,6 +499,24 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.ApplicationUser", "User")
+                        .WithOne("Empleados")
+                        .HasForeignKey("Laboratorio1AdmonTIC.Models.Empleados", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
                 {
                     b.HasOne("Laboratorio1AdmonTIC.Models.Departamento", "Departamento")
@@ -422,6 +524,25 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .HasForeignKey("DepartamentoId");
 
                     b.Navigation("Departamento");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Productos", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.CategoriasProducto", "CategoriasProducto")
+                        .WithMany()
+                        .HasForeignKey("CategoriasProductoCategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Proveedores", "Proveedores")
+                        .WithMany()
+                        .HasForeignKey("ProveedoresProveedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoriasProducto");
+
+                    b.Navigation("Proveedores");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -472,6 +593,12 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Empleados")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

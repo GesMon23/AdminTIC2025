@@ -131,7 +131,14 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("EmpleadosId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Empleados");
                 });
@@ -342,6 +349,11 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -393,6 +405,10 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -480,6 +496,24 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.ApplicationUser", "User")
+                        .WithOne("Empleados")
+                        .HasForeignKey("Laboratorio1AdmonTIC.Models.Empleados", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
                 {
                     b.HasOne("Laboratorio1AdmonTIC.Models.Departamento", "Departamento")
@@ -556,6 +590,12 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Empleados")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
