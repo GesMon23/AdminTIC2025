@@ -21,7 +21,8 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Empleados
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empleados.ToListAsync());
+            var eRPDbContext = _context.Empleados.Include(e => e.User);
+            return View(await eRPDbContext.ToListAsync());
         }
 
         // GET: Empleados/Details/5
@@ -33,6 +34,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var empleados = await _context.Empleados
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EmpleadosId == id);
             if (empleados == null)
             {
@@ -45,6 +47,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Empleados/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario")] Empleados empleados)
+        public async Task<IActionResult> Create([Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario,UserId")] Empleados empleados)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
             return View(empleados);
         }
 
@@ -78,6 +82,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
             return View(empleados);
         }
 
@@ -86,7 +91,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario")] Empleados empleados)
+        public async Task<IActionResult> Edit(Guid id, [Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario,UserId")] Empleados empleados)
         {
             if (id != empleados.EmpleadosId)
             {
@@ -113,6 +118,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
             return View(empleados);
         }
 
@@ -125,6 +131,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var empleados = await _context.Empleados
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EmpleadosId == id);
             if (empleados == null)
             {
