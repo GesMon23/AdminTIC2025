@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Laboratorio1AdmonTIC.Models
 {
@@ -29,5 +30,9 @@ namespace Laboratorio1AdmonTIC.Models
 		[ScaffoldColumn(false)]
 		public bool Inactivo { get; set; }
 
-	}
+        [ForeignKey("UserId")]
+        public string UserId { get; set; } // Foreign Key a AspNetUsers
+        public virtual ApplicationUser User { get; set; }
+
+    }
 }

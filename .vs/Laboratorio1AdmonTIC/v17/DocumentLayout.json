@@ -1,94 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\",
+  "WorkspaceRootPath": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\erpdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\erpdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\tiposmovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\tiposmovimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\metodospago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\metodospago.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\productos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\proveedores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\empleados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\models\\empleados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\empleados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\categoriasproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\categoriasproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\models\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\models\\clientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\user\\documents\\github\\admintic2025\\laboratorio1admontic\\migrations\\20250330210751_dep.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\migrations\\20250330210751_dep.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,290 +18,40 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "20250403010408_produ.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403010408_produ.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T01:04:09.157Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TiposMovimiento.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\TiposMovimiento.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\TiposMovimiento.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\TiposMovimiento.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\TiposMovimiento.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T01:06:10.474Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "20250403010149_prod.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403010149_prod.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T01:01:49.187Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Productos.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Productos.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Productos.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Productos.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Productos.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAQwAYAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:48:32.079Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "20250403004614_prov.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403004614_prov.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:46:14.417Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "20250403004332_cat.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403004332_cat.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:43:32.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CategoriasProducto.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\CategoriasProducto.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\CategoriasProducto.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\CategoriasProducto.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\CategoriasProducto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:42:23.316Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Clientes.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Clientes.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Clientes.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Clientes.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Clientes.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:33:23.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "20250330213121_munic.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250330213121_munic.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:31:22.113Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "20250330212915_muni.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250330212915_muni.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:29:15.48Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "20250330213211_munic.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250330213211_munic.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:32:11.216Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "20250330210751_dep.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330210751_dep.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250330210751_dep.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250330210751_dep.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250330210751_dep.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:07:51.295Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-23T21:46:18.423Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Program.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Program.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T21:33:09.019Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20250403010809_movim.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403010809_movim.cs",
+              "Title": "EmpleadosController.cs",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Controllers\\EmpleadosController.cs",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Controllers\\EmpleadosController.cs",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Controllers\\EmpleadosController.cs",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Controllers\\EmpleadosController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T01:08:10.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Municipio.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Municipio.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Municipio.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Municipio.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Municipio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:23:37.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Proveedores.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Proveedores.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Proveedores.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Proveedores.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Proveedores.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:44:49.806Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Empleados.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Empleados.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Empleados.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Empleados.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Empleados.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:33:53.369Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MetodosPago.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\MetodosPago.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\MetodosPago.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\MetodosPago.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\MetodosPago.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:28:18.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "20250403003002_met.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Migrations\\20250403003002_met.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-03T00:30:03.112Z",
+              "WhenOpened": "2025-04-06T02:57:24.243Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ERPDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\ERPDbContext.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\ERPDbContext.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\ERPDbContext.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\ERPDbContext.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB4AAAAvAAAA",
+              "Title": "Empleados.cs",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Empleados.cs",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Empleados.cs",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Empleados.cs",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Empleados.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAmwCEAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T20:57:43.333Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Departamento.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Departamento.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Models\\Departamento.cs",
-              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Models\\Departamento.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Models\\Departamento.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T20:43:42.617Z",
+              "WhenOpened": "2025-04-06T02:33:19.219Z",
               "EditorCaption": ""
             }
           ]

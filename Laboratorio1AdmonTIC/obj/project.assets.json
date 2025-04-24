@@ -8323,19 +8323,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\juare\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
+      "projectUniqueName": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnologías\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
       "projectName": "Laboratorio1AdmonTIC",
-      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\AdminTIC2025\\Laboratorio1AdmonTIC\\obj\\",
+      "projectPath": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnologías\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj",
+      "packagesPath": "C:\\Users\\juare\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnologías\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\juare\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
