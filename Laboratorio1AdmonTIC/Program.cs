@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+//ConexionSomee
+//ConexionLocal
 var connectionString = builder.Configuration.GetConnectionString("ConexionLocal") ?? throw new InvalidOperationException("Connection string 'ConexionDesar' not found.");
 
 

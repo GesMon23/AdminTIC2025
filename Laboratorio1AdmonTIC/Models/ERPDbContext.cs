@@ -27,6 +27,20 @@ namespace Laboratorio1AdmonTIC.Models
                 .WithOne(u => u.Empleados) // Un User tiene un Empleado
                 .HasForeignKey<Empleados>(e => e.UserId) // Especificamos que UserId es la FK
                 .OnDelete(DeleteBehavior.Restrict); // Opcional: controlar la eliminación (en caso de necesidad)
+
+            // Relación entre DetallesCompras y Compras
+            modelBuilder.Entity<DetallesCompras>()
+                .HasOne(d => d.Compras)
+                .WithMany()  // No hay navegación inversa en este caso
+                .HasForeignKey(d => d.CompraId)
+                .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
+
+            // Relación entre DetallesCompras y Productos
+            modelBuilder.Entity<DetallesCompras>()
+                .HasOne(d => d.Productos)
+                .WithMany()  // No hay navegación inversa en este caso
+                .HasForeignKey(d => d.ProductoId)
+                .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
         }
 
         public DbSet<MetodosPago> MetodosPago { get; set; }
@@ -40,5 +54,15 @@ namespace Laboratorio1AdmonTIC.Models
 		public DbSet<Productos> Productos { get; set; }
 
 		public DbSet<TiposMovimiento> TiposMovimiento { get; set; }
+
+        public DbSet<Compras> Compras { get; set; }
+
+        public DbSet<DetallesCompras> DetallesCompras { get;set; }
+
+        public DbSet<Inventario> Inventario { get; set; }
+
+        public DbSet<DetallesVenta> DetallesVenta { get; set; }
+
+        public DbSet<Ventas> Ventas { get; set; }
 	}
 }

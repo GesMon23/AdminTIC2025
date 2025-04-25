@@ -6,7 +6,7 @@ namespace Laboratorio1AdmonTIC.Models
 	public class Clientes
 	{
 		[Key]
-		public Guid EmpleadoId { get; set; }
+		public Guid ClienteId { get; set; }
 
 		[DisplayName("Nombres")]
 		public string Nombres { get; set; }

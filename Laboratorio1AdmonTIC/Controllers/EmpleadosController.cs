@@ -138,7 +138,12 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(empleados);
+            //return View(empleados);
+            empleados.Inactivo = true;
+            _context.Update(empleados);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: Empleados/Delete/5

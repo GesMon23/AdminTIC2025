@@ -42,7 +42,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Clientes", b =>
                 {
-                    b.Property<Guid>("EmpleadoId")
+                    b.Property<Guid>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -75,9 +75,42 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EmpleadoId");
+                    b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Compras", b =>
+                {
+                    b.Property<Guid>("CompraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmpleadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaCompra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProveedoresProveedorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("CompraId");
+
+                    b.HasIndex("EmpleadosId");
+
+                    b.HasIndex("ProveedoresProveedorId");
+
+                    b.ToTable("Compras");
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Departamento", b =>
@@ -98,6 +131,75 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasKey("DepartamentoId");
 
                     b.ToTable("Departamento");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesCompras", b =>
+                {
+                    b.Property<Guid>("DetalleCompraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("CompraId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("PrecioUnitario")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("DetalleCompraId");
+
+                    b.HasIndex("CompraId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("DetallesCompras");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesVenta", b =>
+                {
+                    b.Property<Guid>("DetalleVentaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("PrecioUnitario")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("ProductoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductosProductoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("VentasId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DetalleVentaId");
+
+                    b.HasIndex("ProductosProductoId");
+
+                    b.HasIndex("VentasId");
+
+                    b.ToTable("DetallesVenta");
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
@@ -141,6 +243,47 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsUnique();
 
                     b.ToTable("Empleados");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Inventario", b =>
+                {
+                    b.Property<Guid>("MovimientoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("EmpleadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaCompra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ProductoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductosProductoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TipoMovimientoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TiposMovimientoTipoMovimientoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MovimientoId");
+
+                    b.HasIndex("EmpleadosId");
+
+                    b.HasIndex("ProductosProductoId");
+
+                    b.HasIndex("TiposMovimientoTipoMovimientoId");
+
+                    b.ToTable("Inventario");
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.MetodosPago", b =>
@@ -202,6 +345,9 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -283,6 +429,47 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasKey("TipoMovimientoId");
 
                     b.ToTable("TiposMovimiento");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Ventas", b =>
+                {
+                    b.Property<Guid>("VentasId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClienteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClientesClienteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EmpleadosId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("FechaVenta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Inactivo")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MetodoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MetodosPagoMetodoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("VentasId");
+
+                    b.HasIndex("ClientesClienteId");
+
+                    b.HasIndex("EmpleadosId");
+
+                    b.HasIndex("MetodosPagoMetodoId");
+
+                    b.ToTable("Ventas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -503,6 +690,63 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Compras", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Empleados", "Empleados")
+                        .WithMany()
+                        .HasForeignKey("EmpleadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Proveedores", "Proveedores")
+                        .WithMany()
+                        .HasForeignKey("ProveedoresProveedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empleados");
+
+                    b.Navigation("Proveedores");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesCompras", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Compras", "Compras")
+                        .WithMany()
+                        .HasForeignKey("CompraId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Productos", "Productos")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Compras");
+
+                    b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesVenta", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Productos", "Productos")
+                        .WithMany()
+                        .HasForeignKey("ProductosProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Ventas", "Ventas")
+                        .WithMany()
+                        .HasForeignKey("VentasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Productos");
+
+                    b.Navigation("Ventas");
+                });
+
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
                 {
                     b.HasOne("Laboratorio1AdmonTIC.Models.ApplicationUser", "User")
@@ -512,6 +756,33 @@ namespace Laboratorio1AdmonTIC.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Inventario", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Empleados", "Empleados")
+                        .WithMany()
+                        .HasForeignKey("EmpleadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Productos", "Productos")
+                        .WithMany()
+                        .HasForeignKey("ProductosProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.TiposMovimiento", "TiposMovimiento")
+                        .WithMany()
+                        .HasForeignKey("TiposMovimientoTipoMovimientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empleados");
+
+                    b.Navigation("Productos");
+
+                    b.Navigation("TiposMovimiento");
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
@@ -540,6 +811,33 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.Navigation("CategoriasProducto");
 
                     b.Navigation("Proveedores");
+                });
+
+            modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Ventas", b =>
+                {
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Clientes", "Clientes")
+                        .WithMany()
+                        .HasForeignKey("ClientesClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.Empleados", "Empleados")
+                        .WithMany()
+                        .HasForeignKey("EmpleadosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Laboratorio1AdmonTIC.Models.MetodosPago", "MetodosPago")
+                        .WithMany()
+                        .HasForeignKey("MetodosPagoMetodoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Clientes");
+
+                    b.Navigation("Empleados");
+
+                    b.Navigation("MetodosPago");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
