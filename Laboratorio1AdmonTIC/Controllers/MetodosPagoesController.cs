@@ -131,7 +131,12 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(metodosPago);
+            //return View(metodosPago);
+            metodosPago.Inactivo = true;
+            _context.Update(metodosPago);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: MetodosPagoes/Delete/5

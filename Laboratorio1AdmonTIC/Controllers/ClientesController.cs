@@ -33,7 +33,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var clientes = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.EmpleadoId == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (clientes == null)
             {
                 return NotFound();
@@ -53,11 +53,11 @@ namespace Laboratorio1AdmonTIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpleadoId,Nombres,Apellidos,Telefono,Direccion,Email,CUI,NIT")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("ClienteId,Nombres,Apellidos,Telefono,Direccion,Email,CUI,NIT")] Clientes clientes)
         {
             if (ModelState.IsValid)
             {
-                clientes.EmpleadoId = Guid.NewGuid();
+                clientes.ClienteId = Guid.NewGuid();
                 _context.Add(clientes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -86,9 +86,9 @@ namespace Laboratorio1AdmonTIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("EmpleadoId,Nombres,Apellidos,Telefono,Direccion,Email,CUI,NIT")] Clientes clientes)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ClienteId,Nombres,Apellidos,Telefono,Direccion,Email,CUI,NIT")] Clientes clientes)
         {
-            if (id != clientes.EmpleadoId)
+            if (id != clientes.ClienteId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientesExists(clientes.EmpleadoId))
+                    if (!ClientesExists(clientes.ClienteId))
                     {
                         return NotFound();
                     }
@@ -125,13 +125,18 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var clientes = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.EmpleadoId == id);
+                .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (clientes == null)
             {
                 return NotFound();
             }
 
-            return View(clientes);
+            //return View(clientes);
+            clientes.Inactivo = true;
+            _context.Update(clientes);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: Clientes/Delete/5
@@ -151,7 +156,7 @@ namespace Laboratorio1AdmonTIC.Controllers
 
         private bool ClientesExists(Guid id)
         {
-            return _context.Clientes.Any(e => e.EmpleadoId == id);
+            return _context.Clientes.Any(e => e.ClienteId == id);
         }
     }
 }

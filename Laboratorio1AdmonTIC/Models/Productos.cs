@@ -37,5 +37,7 @@ namespace Laboratorio1AdmonTIC.Models
 
 		[DisplayName("UnidadMedida")]
 		public string? UnidadMedida { get; set; }
-	}
+        [ScaffoldColumn(false)]
+        public bool Inactivo { get; set; }
+    }
 }

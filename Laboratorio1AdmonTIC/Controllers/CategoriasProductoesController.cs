@@ -131,7 +131,13 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(categoriasProducto);
+            //return View(categoriasProducto);
+
+            categoriasProducto.Inactivo = true;
+            _context.Update(categoriasProducto);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: CategoriasProductoes/Delete/5

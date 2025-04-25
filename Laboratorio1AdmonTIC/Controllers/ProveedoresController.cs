@@ -131,7 +131,12 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(proveedores);
+            //return View(proveedores);
+            proveedores.Inactivo = true;
+            _context.Update(proveedores);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: Proveedores/Delete/5

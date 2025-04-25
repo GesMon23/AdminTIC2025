@@ -131,7 +131,12 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(municipio);
+            //return View(municipio);
+            municipio.Inactivo = true;
+            _context.Update(municipio);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         // POST: Municipios/Delete/5
