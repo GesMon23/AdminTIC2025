@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,8 +22,20 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: DetallesVentas
         public async Task<IActionResult> Index()
         {
-            var eRPDbContext = _context.DetallesVenta.Include(d => d.Ventas);
-            return View(await eRPDbContext.ToListAsync());
+            //return View(await _context.DetallesVenta.Where(c => !c.Inactivo).ToListAsync());
+            var dventas = await (from dv in _context.DetallesVenta
+                                 join p in _context.Productos on dv.ProductoId equals p.ProductoId
+                                 where !dv.Inactivo
+                                 select new DetallesVentasViewModel 
+                                 {
+                                     DetalleVentaId= dv.DetalleVentaId,
+                                     VentasId = dv.VentasId,
+                                     Producto = p.Nombre,
+                                     Cantidad = dv.Cantidad,
+                                     PrecioUnitario = dv.PrecioUnitario,
+                                     Total = dv.Total
+                                 }).ToListAsync();
+            return View(dventas);
         }
 
         // GET: DetallesVentas/Details/5
@@ -34,7 +47,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var detallesVenta = await _context.DetallesVenta
-                .Include(d => d.Ventas)
+                //.Include(d => d.Ventas)
                 .FirstOrDefaultAsync(m => m.DetalleVentaId == id);
             if (detallesVenta == null)
             {
@@ -44,10 +57,36 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(detallesVenta);
         }
 
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var detallesVentas = (from dc in _context.DetallesVenta
+                                   join p in _context.Productos on dc.ProductoId equals p.ProductoId
+                                   where !dc.Inactivo && dc.DetalleVentaId == id
+                                   select new DetallesVentasViewModel
+                                   {
+                                       DetalleVentaId = dc.DetalleVentaId,
+                                       VentasId = dc.VentasId,
+                                       Producto = p.Nombre,
+                                       Descripcion = p.Descripcion,
+                                       Cantidad = dc.Cantidad,
+                                       PrecioUnitario = dc.PrecioUnitario,
+                                       Total = dc.Total
+                                   }).FirstOrDefault();
+
+            if (detallesVentas == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Details", detallesVentas);
+        }
+
         // GET: DetallesVentas/Create
         public IActionResult Create()
         {
-            ViewData["VentasId"] = new SelectList(_context.Ventas, "VentasId", "VentasId");
+            ViewBag.Ventas = new SelectList(_context.Ventas.Where(p => !p.Inactivo), "VentasId", "VentasId");
+            ViewBag.Productos = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View();
         }
 
@@ -65,7 +104,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VentasId"] = new SelectList(_context.Ventas, "VentasId", "VentasId", detallesVenta.VentasId);
+            ViewBag.Ventas = new SelectList(_context.Ventas.Where(p => !p.Inactivo), "VentasId", "VentasId");
+            ViewBag.Productos = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(detallesVenta);
         }
 
@@ -82,7 +122,8 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
-            ViewData["VentasId"] = new SelectList(_context.Ventas, "VentasId", "VentasId", detallesVenta.VentasId);
+            ViewBag.Ventas = new SelectList(_context.Ventas.Where(p => !p.Inactivo), "VentasId", "VentasId");
+            ViewBag.Productos = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(detallesVenta);
         }
 
@@ -118,7 +159,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VentasId"] = new SelectList(_context.Ventas, "VentasId", "VentasId", detallesVenta.VentasId);
+            ViewBag.Ventas = new SelectList(_context.Ventas.Where(p => !p.Inactivo), "VentasId", "VentasId");
+            ViewBag.Productos = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(detallesVenta);
         }
 
@@ -131,7 +173,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var detallesVenta = await _context.DetallesVenta
-                .Include(d => d.Ventas)
+                //.Include(d => d.Ventas)
                 .FirstOrDefaultAsync(m => m.DetalleVentaId == id);
             if (detallesVenta == null)
             {

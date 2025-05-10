@@ -21,7 +21,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: TiposMovimientoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TiposMovimiento.ToListAsync());
+            return View(await _context.TiposMovimiento.Where(c => !c.Inactivo).ToListAsync());
         }
 
         // GET: TiposMovimientoes/Details/5
@@ -39,7 +39,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(tiposMovimiento);
+            return PartialView("Details", tiposMovimiento);
         }
 
         // GET: TiposMovimientoes/Create

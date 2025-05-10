@@ -1,18 +1,31 @@
-(function($) {
-  showSwal = function(type) {
-    'use strict';
-    if (type === 'basic') {
-      swal({
-        text: 'Any fool can use a computer',
-        button: {
-          text: "OK",
-          value: true,
-          visible: true,
-          className: "btn btn-primary"
+﻿(function($) {
+    showSwal = function (type, nombre, deleteUrl) {
+        if (type === 'confirm-delete') {
+            swal({
+                title: "¿Está seguro?",
+                text: `¿Desea eliminar el registro "${nombre}"?`,
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        visible: true,
+                        className: "btn btn-secondary",
+                        closeModal: true
+                    },
+                    confirm: {
+                        text: "Sí, eliminar",
+                        visible: true,
+                        className: "btn btn-danger",
+                        closeModal: true
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = deleteUrl;
+                }
+            });
         }
-      })
-
-    } else if (type === 'title-and-text') {
+        else if (type === 'title-and-text') {
       swal({
         title: 'Read the alert!',
         text: 'Click OK to close this alert',
@@ -54,8 +67,8 @@
       )
     } else if (type === 'warning-message-and-cancel') {
       swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Estas seguro?',
+        text: `¿Desea eliminar el registro "${nombre}"?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3f51b5',
@@ -100,3 +113,66 @@
   }
 
 })(jQuery);
+function confirmarEliminacion(event, url) {
+    event.preventDefault(); // evitar navegación directa
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará el registro permanentemente.',
+        icon: 'warning',
+        background: '#222437',    
+        color: '#adadb8',
+        customClass: {
+            icon: 'mt-5 mb-0',
+            confirmButton: 'btn btn-inverse-danger btn-fw',
+            cancelButton: 'btn btn-inverse-secondary btn-fw'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        //input: 'password',  // Campo para ingresar la contraseña
+        
+        
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = url;
+        }
+    });
+}
+
+function mostrarErrorDesdeTempData(mensaje) {
+    if (mensaje && mensaje !== '') {
+        Swal.fire({
+            title: 'Advertencia',
+            text: mensaje,
+            footer: '¡No fue posible ejecutar la acción!',
+            icon: 'info',
+            background: '#222437',
+            color: '#adadb8',
+            confirmButtonText: 'Entendido',
+            customClass: {
+                icon: 'mt-5 mb-0',
+                confirmButton: 'btn btn-inverse-info btn-fw'
+            }
+        });
+    }
+}
+
+function errorLogin(mensaje) {
+    if (mensaje && mensaje !== '') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Login inválido',
+            text: mensaje,
+            background: '#222437',
+            color: '#adadb8',
+            confirmButtonText: 'Entendido',
+            customClass: {
+                icon: 'mt-5 mb-0',
+                confirmButton: 'btn btn-inverse-danger btn-fw'
+            }
+        });
+    }
+    
+}
+

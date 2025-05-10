@@ -11,11 +11,11 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ForeignKey("ProveedorId")]
         public Guid ProveedorId { get; set; }
-        public virtual Proveedores Proveedores { get; set; }
+        //public virtual Proveedores Proveedores { get; set; }
 
         [ForeignKey("EmpleadosId")]
         public Guid EmpleadosId { get; set; }
-        public virtual Empleados Empleados { get; set; }
+        //public virtual Empleados Empleados { get; set; }
 
         [DisplayName("FechaCompra")]
         [DataType(DataType.Date)]

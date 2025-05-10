@@ -11,11 +11,11 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ForeignKey("CompraId")]
         public Guid CompraId { get; set; }
-        public virtual Compras Compras { get; set; }
+        //public virtual Compras Compras { get; set; }
 
         [ForeignKey("ProductoId")]
         public Guid ProductoId { get; set; }
-        public virtual Productos Productos { get; set; }
+        //public virtual Productos Productos { get; set; }
 
         [DisplayName("Cantidad")]
         public int Cantidad { get; set; }

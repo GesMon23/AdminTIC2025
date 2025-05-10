@@ -1,48 +1,61 @@
-﻿@model Laboratorio1AdmonTIC.Models.DetallesCompras
+﻿@model Laboratorio1AdmonTIC.ViewModels.DetallesComprasViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>DetallesCompras</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CompraId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CompraId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductoId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioUnitario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioUnitario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.DetalleCompraId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Detalles Compra</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.DetalleCompraId)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.DetalleCompraId)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.CompraId)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.CompraId)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Producto)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Producto)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Cantidad)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.PrecioUnitario)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.PrecioUnitario)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Total)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Total)
+            </dd>
+        </dl>
+        <div>
+            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.DetalleCompraId">Editar</a>
+            <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a>
+        </div>
+    </div>
 </div>

@@ -21,7 +21,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _context.Clientes.Where(c => !c.Inactivo).ToListAsync());
         }
 
         // GET: Clientes/Details/5
@@ -39,7 +39,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(clientes);
+            return PartialView("Details", clientes);
         }
 
         // GET: Clientes/Create

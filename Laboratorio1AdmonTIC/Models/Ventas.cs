@@ -11,15 +11,15 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ForeignKey("ClienteId")]
         public Guid ClienteId { get; set; }
-        public virtual Clientes Clientes { get; set; }
+        //public virtual Clientes Clientes { get; set; }
 
         [ForeignKey("EmpleadosId")]
         public Guid EmpleadosId { get; set; }
-        public virtual Empleados Empleados { get; set; }
+        //public virtual Empleados Empleados { get; set; }
 
         [ForeignKey("MetodoId")]
         public Guid MetodoId { get; set; }
-        public virtual MetodosPago MetodosPago { get; set; }
+        //public virtual MetodosPago MetodosPago { get; set; }
 
         [DisplayName("FechaVenta")]
         [DataType(DataType.Date)]

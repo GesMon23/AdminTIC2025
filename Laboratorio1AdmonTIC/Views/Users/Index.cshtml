@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityUser>
+
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<h1>Usuarios</h1>
+
+<p>
+    <a type="button" class="btn btn-inverse-success btn-fw" asp-area="Identity" asp-page="/Account/Register">Nuevo Registro</a>
+</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Gestión de Usuario</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    
+                    <table id="order-listing" class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@user.Id">
+                                            <i class="mdi mdi-pencil"></i>
+                                            @* Editar *@
+                                        </a>
+
+                                        <a type="button" class="btn btn-inverse-info me-2 py-2 px-3" asp-action="Details" asp-route-id="@user.Id">
+                                            <i class="mdi mdi-note-text"></i>
+                                            @* Detalles *@
+                                        </a>
+
+                                        <a href="@Url.Action("Delete", new { id = user.Id })"
+                                           class="btn btn-inverse-danger me-2 py-2 px-3"
+                                           onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = user.Id })')">
+                                            <i class="mdi mdi-delete"></i>
+                                            @* Eliminar *@
+                                        </a>
+                                    </td>
+                                    <td>@user.Id</td>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

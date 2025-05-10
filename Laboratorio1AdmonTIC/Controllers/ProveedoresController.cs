@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,7 +22,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Proveedores
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Proveedores.ToListAsync());
+            return View(await _context.Proveedores.Where(c => !c.Inactivo).ToListAsync());
         }
 
         // GET: Proveedores/Details/5
@@ -39,8 +40,12 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(proveedores);
+            return PartialView("Details", proveedores);
         }
+
+
+        
+
 
         // GET: Proveedores/Create
         public IActionResult Create()

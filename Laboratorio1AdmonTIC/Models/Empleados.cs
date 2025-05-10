@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,7 +33,8 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ForeignKey("UserId")]
         public string UserId { get; set; } // Foreign Key a AspNetUsers
-        public virtual ApplicationUser User { get; set; }
+        //public virtual IdentityUser User { get; set; }
+        //ApplicationUser
 
     }
 }

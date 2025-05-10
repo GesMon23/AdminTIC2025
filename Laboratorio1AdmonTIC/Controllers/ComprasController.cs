@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,8 +22,22 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Compras
         public async Task<IActionResult> Index()
         {
-            var eRPDbContext = _context.Compras.Include(c => c.Empleados);
-            return View(await eRPDbContext.ToListAsync());
+            var compras = await (
+                from c in _context.Compras
+                join p in _context.Proveedores on c.ProveedorId equals p.ProveedorId
+                join e in _context.Empleados on c.EmpleadosId equals e.EmpleadosId
+                where !c.Inactivo
+                select new CompraViewModel
+                {
+                    CompraId = c.CompraId,
+                    Proveedor = p.Nombre,
+                    Empleado = e.Nombres + " " + e.Apellidos,
+                    FechaCompra = c.FechaCompra,
+                    Total = c.Total
+                } ).ToListAsync();
+
+            return View(compras);
+
         }
 
         // GET: Compras/Details/5
@@ -34,7 +49,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var compras = await _context.Compras
-                .Include(c => c.Empleados)
                 .FirstOrDefaultAsync(m => m.CompraId == id);
             if (compras == null)
             {
@@ -44,10 +58,37 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(compras);
         }
 
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var compra = (from c in _context.Compras
+                            join e in _context.Empleados on c.EmpleadosId equals e.EmpleadosId
+                            join p in _context.Proveedores on c.ProveedorId equals p.ProveedorId
+                            where !c.Inactivo && c.CompraId == id
+                            select new CompraViewModel
+                            {
+                                CompraId = c.CompraId,
+                                Proveedor = p.Nombre,
+                                Empleado = e.Nombres + ' ' + e.Apellidos,
+                                FechaCompra = c.FechaCompra,
+                                Total = c.Total
+                            }).FirstOrDefault();
+
+            if (compra == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Details", compra);
+        }
+
+
         // GET: Compras/Create
         public IActionResult Create()
         {
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new {Id = e.EmpleadosId,NombreCompleto = e.Nombres + " " + e.Apellidos}),"Id","NombreCompleto");
+
+            ViewBag.Proveedores = new SelectList(_context.Proveedores.Where(p => !p.Inactivo), "ProveedorId", "Nombre");
             return View();
         }
 
@@ -65,7 +106,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", compras.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, NombreCompleto = e.Nombres + " " + e.Apellidos }), "Id", "NombreCompleto");
+            ViewBag.Proveedores = new SelectList(_context.Proveedores.Where(p => !p.Inactivo), "ProveedorId", "Nombre");
             return View(compras);
         }
 
@@ -82,7 +124,8 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", compras.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, NombreCompleto = e.Nombres + " " + e.Apellidos }), "Id", "NombreCompleto");
+            ViewBag.Proveedores = new SelectList(_context.Proveedores.Where(p => !p.Inactivo), "ProveedorId", "Nombre");
             return View(compras);
         }
 
@@ -118,7 +161,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", compras.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, NombreCompleto = e.Nombres + " " + e.Apellidos }), "Id", "NombreCompleto");
+            ViewBag.Proveedores = new SelectList(_context.Proveedores.Where(p => !p.Inactivo), "ProveedorId", "Nombre");
             return View(compras);
         }
 
@@ -131,7 +175,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var compras = await _context.Compras
-                .Include(c => c.Empleados)
                 .FirstOrDefaultAsync(m => m.CompraId == id);
             if (compras == null)
             {

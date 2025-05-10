@@ -20,17 +20,17 @@
 
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-group">
-                    <label for="exampleInputEmail">Email</label>
+                    <label for="exampleInputEmail">Usuario</label>
                     <div class="input-group">
                         <div class="input-group-prepend bg-transparent">
                             <span class="input-group-text bg-transparent border-right-0">
                                 <i class="ti-user text-primary"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control form-control-lg border-left-0" asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                        <input type="text" class="form-control form-control-lg border-left-0" asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" placeholder="Usuario" />
                         @* <label asp-for="Input.Email" class="form-label">Email</label>*@
                     </div>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
 
 
@@ -47,7 +47,6 @@
                     </div>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-         
 
                 <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">
@@ -57,24 +56,24 @@
                             <i class="input-helper"></i>
                         </label>
                     </div>
-                    <a id="forgot-password" class="auth-link text-muted" asp-page="./ForgotPassword">Olvido su contraseña?</a>
+                   @*  <a id="forgot-password" class="auth-link text-muted" asp-page="./ForgotPassword">Olvido su contraseña?</a> *@
                 </div>
 
                 <div class="my-3">
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Iniciar Sesión</button>
                 </div>
 
-                <div>
+                @* <div>
                     @* <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Olvido su contraseña?</a>
-                    </p> *@
+                    </p> 
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrar nuevo usuario</a>
                     </p>
-                    @* <p>
+                     <p>
                         <a class="auth-link text-muted" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Ingresar email de confirmación</a>
-                    </p> *@
-                </div>
+                    </p >
+                </div>*@
             </form>
         </div>
  
@@ -89,4 +88,9 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+
+    <script>
+        errorLogin('@TempData["LoginError"]');
+    </script>
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,7 +22,20 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: DetallesCompras
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DetallesCompras.ToListAsync());
+            //return View(await _context.DetallesCompras.Where(c => !c.Inactivo).ToListAsync());
+            var dcompras = await (from dc in _context.DetallesCompras
+                                  join p in _context.Productos on dc.ProductoId equals p.ProductoId
+                                  where !dc.Inactivo
+                                  select new DetallesComprasViewModel
+                                  {
+                                      DetalleCompraId = dc.DetalleCompraId,
+                                      CompraId = dc.CompraId,
+                                      Producto = p.Nombre,
+                                      Cantidad = dc.Cantidad,
+                                      PrecioUnitario = dc.PrecioUnitario,
+                                      Total = dc.Total
+                                  }).ToListAsync();
+            return View(dcompras);
         }
 
         // GET: DetallesCompras/Details/5
@@ -32,8 +46,19 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            var detallesCompras = await _context.DetallesCompras
-                .FirstOrDefaultAsync(m => m.DetalleCompraId == id);
+            var detallesCompras = (from dc in _context.DetallesCompras
+                                   join p in _context.Productos on dc.ProductoId equals p.ProductoId
+                                   where !dc.Inactivo && dc.DetalleCompraId == id
+                                   select new DetallesComprasViewModel 
+                                   {
+                                       DetalleCompraId = dc.DetalleCompraId,
+                                       CompraId = dc.CompraId,
+                                       Producto = p.Nombre,
+                                       Descripcion = p.Descripcion,
+                                       Cantidad = dc.Cantidad,
+                                       PrecioUnitario = dc.PrecioUnitario,
+                                       Total = dc.Total
+                                   }).FirstOrDefault();
             if (detallesCompras == null)
             {
                 return NotFound();
@@ -42,9 +67,36 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(detallesCompras);
         }
 
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var detallesCompras = (from dc in _context.DetallesCompras
+                                   join p in _context.Productos on dc.ProductoId equals p.ProductoId
+                                   where !dc.Inactivo && dc.DetalleCompraId == id
+                                   select new DetallesComprasViewModel
+                                   {
+                                       DetalleCompraId = dc.DetalleCompraId,
+                                       CompraId = dc.CompraId,
+                                       Producto = p.Nombre,
+                                       Descripcion = p.Descripcion,
+                                       Cantidad = dc.Cantidad,
+                                       PrecioUnitario = dc.PrecioUnitario,
+                                       Total = dc.Total
+                                   }).FirstOrDefault();
+
+            if (detallesCompras == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Details", detallesCompras);
+        }
+
         // GET: DetallesCompras/Create
         public IActionResult Create()
         {
+            ViewBag.Compras = new SelectList(_context.Compras.Where(c => !c.Inactivo), "CompraId", "CompraId");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(c => !c.Inactivo), "ProductoId", "Nombre");
             return View();
         }
 
@@ -62,6 +114,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Compras = new SelectList(_context.Compras.Where(c => !c.Inactivo), "CompraId");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(c => !c.Inactivo), "ProductoId", "Nombre");
             return View(detallesCompras);
         }
 
@@ -78,6 +132,8 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Compras = new SelectList(_context.Compras.Where(c => !c.Inactivo), "CompraId", "CompraId");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(c => !c.Inactivo), "ProductoId", "Nombre");
             return View(detallesCompras);
         }
 
@@ -113,6 +169,8 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Compras = new SelectList(_context.Compras.Where(c => !c.Inactivo), "CompraId", "CompraId");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(c => !c.Inactivo), "ProductoId", "Nombre");
             return View(detallesCompras);
         }
 

@@ -9,13 +9,17 @@ namespace Laboratorio1AdmonTIC.Models
 		[Key]
 		public Guid ProductoId { get; set; }
 
-		[ForeignKey("CategoriaId")]
-		public Guid CategoriaId { get; set; }
-		public virtual CategoriasProducto CategoriasProducto { get; set; }
+        //[ForeignKey("CategoriaId")]
+        [Required(ErrorMessage = "Debe seleccionar una categoría")]
+        [ForeignKey("CategoriaId")]
+        public Guid CategoriaId { get; set; }
+		//public virtual CategoriasProducto CategoriasProducto { get; set; }
 
-		[ForeignKey("ProveedorId")]
-		public Guid ProveedorId { get; set; }
-		public virtual Proveedores Proveedores { get; set; }
+        //[ForeignKey("ProveedorId")]
+        [Required(ErrorMessage = "Debe seleccionar un proveedor")]
+        [ForeignKey("ProveedorId")]
+        public Guid ProveedorId { get; set; }
+		//public virtual Proveedores Proveedores { get; set; }
 
 		[DisplayName("Nombre")]
 		public string Nombre { get; set; }

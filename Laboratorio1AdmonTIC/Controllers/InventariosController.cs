@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,8 +22,23 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Inventarios
         public async Task<IActionResult> Index()
         {
-            var eRPDbContext = _context.Inventario.Include(i => i.Empleados);
-            return View(await eRPDbContext.ToListAsync());
+            //return View(await _context.Inventario.Where(c => !c.Inactivo).ToListAsync());
+            var movimientos = await (from i in _context.Inventario
+                                     join p in _context.Productos on i.ProductoId equals p.ProductoId
+                                     join tm in _context.TiposMovimiento on i.TipoMovimientoId equals tm.TipoMovimientoId
+                                     join e in _context.Empleados on i.EmpleadosId equals e.EmpleadosId
+                                     where !i.Inactivo
+                                     select new MovimientoInventarioViewModel
+                                     {
+                                        MovimientoId = i.MovimientoId,
+                                        ProductoNombre = p.Nombre,
+                                        TipoMovimiento = tm.TipoMovimiento,
+                                        Empleado = e.Nombres + " " + e.Apellidos,
+                                        Cantidad = i.Cantidad,
+                                        FechaCompra = i.FechaCompra
+                                     }).ToListAsync();
+            return View(movimientos);
+
         }
 
         // GET: Inventarios/Details/5
@@ -34,7 +50,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var inventario = await _context.Inventario
-                .Include(i => i.Empleados)
+                //.Include(i => i.Empleados)
                 .FirstOrDefaultAsync(m => m.MovimientoId == id);
             if (inventario == null)
             {
@@ -44,10 +60,39 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(inventario);
         }
 
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var inventario = (from i in _context.Inventario
+                         join p in _context.Productos on i.ProductoId equals p.ProductoId
+                         join tm in _context.TiposMovimiento on i.TipoMovimientoId equals tm.TipoMovimientoId
+                         join e in _context.Empleados on i.EmpleadosId equals e.EmpleadosId
+                         where !i.Inactivo && i.MovimientoId == id
+                         select new MovimientoInventarioViewModel
+                         {
+                             MovimientoId = i.MovimientoId,
+                             ProductoNombre = p.Nombre,
+                             TipoMovimiento = tm.TipoMovimiento,
+                             Empleado = e.Nombres + ' ' + e.Apellidos,
+                             Cantidad = i.Cantidad,
+                             FechaCompra = i.FechaCompra
+                         }).FirstOrDefault();
+
+            if (inventario == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Details", inventario);
+        }
+
+
         // GET: Inventarios/Create
         public IActionResult Create()
-        {
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId");
+        {//producto, TipoMovimiento, empleado
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.TipoMovimiento = new SelectList(_context.TiposMovimiento.Where(p => !p.Inactivo), "TipoMovimientoId", "TipoMovimiento");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View();
         }
 
@@ -65,7 +110,9 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", inventario.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.TipoMovimiento = new SelectList(_context.TiposMovimiento.Where(p => !p.Inactivo), "TipoMovimientoId", "TipoMovimiento");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(inventario);
         }
 
@@ -82,7 +129,9 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", inventario.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.TipoMovimiento = new SelectList(_context.TiposMovimiento.Where(p => !p.Inactivo), "TipoMovimientoId", "TipoMovimiento");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(inventario);
         }
 
@@ -118,7 +167,9 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", inventario.EmpleadosId);
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.TipoMovimiento = new SelectList(_context.TiposMovimiento.Where(p => !p.Inactivo), "TipoMovimientoId", "TipoMovimiento");
+            ViewBag.Producto = new SelectList(_context.Productos.Where(p => !p.Inactivo), "ProductoId", "Nombre");
             return View(inventario);
         }
 
@@ -131,7 +182,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var inventario = await _context.Inventario
-                .Include(i => i.Empleados)
+                //.Include(i => i.Empleados)
                 .FirstOrDefaultAsync(m => m.MovimientoId == id);
             if (inventario == null)
             {

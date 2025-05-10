@@ -1,71 +1,146 @@
-﻿@model IEnumerable<Laboratorio1AdmonTIC.Models.Empleados>
+﻿@model IEnumerable<Laboratorio1AdmonTIC.ViewModels.EmpleadosViewModels>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Empleados";
 }
 
-<h1>Index</h1>
+<h1>Empleados</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellidos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cargo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellidos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EmpleadosId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EmpleadosId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EmpleadosId">Delete</a>
-            </td>
-        </tr>
+
+<!-- Modal Detalles  -->
+<div class="modal fade" id="detalleEmpleadoModal" tabindex="-1" role="dialog" aria-labelledby="detalleProductoLabel" aria-hidden="true">
+    <div class="modal-dialog custom-width modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Detalles Empleado</h1>
+            </div>
+            <div class="modal-body" id="detalleEmpleadoContenido">
+                <div class="text-center py-5">
+                    <div class="spinner-border" role="status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Gestión de Empleados</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombres)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Apellidos)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Cargo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Salario)
+                                </th>
+                                <th>
+                                    Usuario
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.EmpleadosId" data-toggle="tooltip" title="Editar">
+                                            <i class="mdi mdi-pencil"></i>
+                                            @* Editar *@
+                                        </a>
+
+                                        @* <a type="button" class="btn btn-inverse-info me-2 py-2 px-3" asp-action="Details" asp-route-id="@item.EmpleadosId" data-toggle="tooltip" title="Detalles">
+                                            <i class="mdi mdi-note-text"></i>
+                                             Detalles 
+                                        </a> *@
+                                        <a href="javascript:void(0);" type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.EmpleadosId" data-toggle="tooltip" title="Detalles">
+                                            <i class="mdi mdi-note-text"></i> @* Detalles *@
+                                        </a>
+
+                                        <a href="@Url.Action("Delete", new { id = item.EmpleadosId })"
+                                           class="btn btn-inverse-danger me-2 py-2 px-3"
+                                           onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = item.EmpleadosId })')" data-toggle="tooltip" title="Eliminar">
+                                            <i class="mdi mdi-delete"></i>
+                                            @* Eliminar *@
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombres)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Apellidos)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cargo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Salario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Usuario)
+                                    </td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <script>
+        // Código JavaScript usando delegación de eventos
+        $(document).on('click', '.btn-detalle', function () {
+            var id = $(this).data('id');
+
+            if (!id) {
+                alert("ID no válido");
+                return;
+            }
+
+            $('#detalleEmpleadoContenido').html('<div class="text-center py-5"><div class="spinner-border text-info" role="status"></div></div>');
+            $('#detalleEmpleadoModal').modal('show');
+
+            $.get('/Empleados/DetailsPartial/' + id, function (data) {
+                $('#detalleEmpleadoContenido').html(data);
+            }).fail(function () {
+                $('#detalleEmpleadoContenido').html('<p class="text-danger">Error al cargar detalles.</p>');
+            });
+        });
+
+    </script>
 }
-    </tbody>
-</table>

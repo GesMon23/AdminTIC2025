@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,8 +22,24 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Ventas
         public async Task<IActionResult> Index()
         {
-            var eRPDbContext = _context.Ventas.Include(v => v.Empleados);
-            return View(await eRPDbContext.ToListAsync());
+            //return View(await _context.Ventas.Where(c => !c.Inactivo).ToListAsync());
+            var ventas = await (from v in _context.Ventas
+                                join c in _context.Clientes on v.ClienteId equals c.ClienteId
+                                join e in _context.Empleados on v.EmpleadosId equals e.EmpleadosId
+                                join mp in _context.MetodosPago on v.MetodoId equals mp.MetodoId
+                                where !v.Inactivo
+                                select new VentaViewModel
+                                {
+                                    VentasId = v.VentasId,
+                                    Cliente = c.Nombres + " " + c.Apellidos,
+                                    Empleado = e.Nombres + " " + e.Apellidos,
+                                    TipoPago = mp.TipoPago,
+                                    FechaVenta = v.FechaVenta,
+                                    Total = v.Total
+                                }
+                            ).ToListAsync();
+
+            return View(ventas);
         }
 
         // GET: Ventas/Details/5
@@ -34,7 +51,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var ventas = await _context.Ventas
-                .Include(v => v.Empleados)
                 .FirstOrDefaultAsync(m => m.VentasId == id);
             if (ventas == null)
             {
@@ -44,10 +60,39 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(ventas);
         }
 
+
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var venta = (from ve in _context.Ventas
+                         join cl in _context.Clientes on ve.ClienteId equals cl.ClienteId
+                         join em in _context.Empleados on ve.EmpleadosId equals em.EmpleadosId
+                         join mepa in _context.MetodosPago on ve.MetodoId equals mepa.MetodoId
+                         where !ve.Inactivo && ve.VentasId == id
+                         select new VentaViewModel
+                          {
+                            VentasId = ve.ClienteId,
+                            Cliente = cl.Nombres + ' ' + cl.Apellidos,
+                            Empleado = em.Nombres + ' ' + em.Apellidos,
+                            TipoPago = mepa.TipoPago,
+                            FechaVenta = ve.FechaVenta,
+                            Total = ve.Total
+                          }).FirstOrDefault();
+
+            if (venta == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("Details", venta);
+        }
+
         // GET: Ventas/Create
         public IActionResult Create()
         {
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId");
+            ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
             return View();
         }
 
@@ -65,7 +110,9 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", ventas.EmpleadosId);
+            ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
             return View(ventas);
         }
 
@@ -82,7 +129,9 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", ventas.EmpleadosId);
+            ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
             return View(ventas);
         }
 
@@ -118,7 +167,9 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EmpleadosId"] = new SelectList(_context.Empleados, "EmpleadosId", "EmpleadosId", ventas.EmpleadosId);
+            ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
             return View(ventas);
         }
 
@@ -131,7 +182,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var ventas = await _context.Ventas
-                .Include(v => v.Empleados)
                 .FirstOrDefaultAsync(m => m.VentasId == id);
             if (ventas == null)
             {

@@ -1,35 +1,109 @@
 ﻿@model IEnumerable<Laboratorio1AdmonTIC.Models.CategoriasProducto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CategoríaProductos";
 }
 
-<h1>Index</h1>
+<h1>Categoría Productos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
-            </td>
-        </tr>
+
+<!-- Modal Detalles -->
+<div class="modal fade" id="detalleCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="categoriaProductoLabel" aria-hidden="true">
+    <div class="modal-dialog custom-width modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Detalles Categoría Producto</h1>
+            </div>
+            <div class="modal-body" id="detalleCategoriaContenido">
+                <div class="text-center py-5">
+                    <div class="spinner-border" role="status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Gestión de Categoría Productos</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="order-listing" class="table ">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center w-25">
+                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.CategoriaId" data-toggle="tooltip" title="Editar">
+                                            <i class="mdi mdi-pencil"></i>
+                                            @* Editar *@
+                                        </a>
+                                        @* <a type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" asp-action="Details" asp-route-id="@item.CategoriaId" data-toggle="tooltip" title="Detalles">
+                                            <i class="mdi mdi-note-text"></i>
+                                             Detalles 
+                                        </a> *@
+                                        <a type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.CategoriaId" data-toggle="tooltip" title="Detalles">
+                                            <i class="mdi mdi-note-text"></i> @* Detalles *@
+                                        </a>
+
+                                        <a href="@Url.Action("Delete", new { id = item.CategoriaId })"
+                                           class="btn btn-inverse-danger me-2 py-2 px-3"
+                                           onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = item.CategoriaId })')" data-toggle="tooltip" title="Eliminar">
+                                            <i class="mdi mdi-delete"></i>
+                                            @* Eliminar *@
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script>
+        // Código JavaScript usando delegación de eventos
+        $(document).on('click', '.btn-detalle', function () {
+            var id = $(this).data('id');
+
+            if (!id) {
+                alert("ID no válido");
+                return;
+            }
+
+            $('#detalleCategoriaContenido').html('<div class="text-center py-5"><div class="spinner-border text-info" role="status"></div></div>');
+            $('#detalleCategoriaModal').modal('show');
+
+            $.get('/CategoriasProductoes/DetailsPartial/' + id, function (data) {
+                $('#detalleCategoriaContenido').html(data);
+            }).fail(function () {
+                $('#detalleCategoriaContenido').html('<p class="text-danger">Error al cargar detalles.</p>');
+            });
+        });
+
+    </script>
+
 }
-    </tbody>
-</table>

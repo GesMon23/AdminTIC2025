@@ -4,21 +4,28 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>TiposMovimiento</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoMovimiento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoMovimiento)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.TipoMovimientoId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Tipos de Movimientos</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                Tipo de Movimiento Id
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.TipoMovimientoId)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.TipoMovimiento)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.TipoMovimiento)
+            </dd>
+        </dl>
+        <div>
+            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.TipoMovimientoId">Editar</a>
+            <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a>
+        </div>
+    </div>
 </div>

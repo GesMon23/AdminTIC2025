@@ -1,42 +1,50 @@
-﻿@model Laboratorio1AdmonTIC.Models.Compras
+﻿@model Laboratorio1AdmonTIC.ViewModels.CompraViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Compras</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProveedorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProveedorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Empleados)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Empleados.EmpleadosId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaCompra)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaCompra)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.CompraId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Compra</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CompraId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CompraId)
+            </dd>
+            <dt class="col-sm-2">
+                Proveedor
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Proveedor)
+            </dd>
+            <dt class="col-sm-2">
+                Empleado
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Empleado)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FechaCompra)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FechaCompra)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Total)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Total)
+            </dd>
+        </dl>
+        <div>
+            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.CompraId">Editar</a>
+            <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a>
+        </div>
+    </div>
 </div>

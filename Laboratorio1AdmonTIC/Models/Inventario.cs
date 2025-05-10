@@ -11,15 +11,15 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ForeignKey("ProductoId")]
         public Guid ProductoId { get; set; }
-        public virtual Productos Productos { get; set; }
+        //public virtual Productos Productos { get; set; }
 
         [ForeignKey("TipoMovimientoId")]
         public Guid TipoMovimientoId { get; set; }
-        public virtual TiposMovimiento TiposMovimiento { get; set; }
+        //public virtual TiposMovimiento TiposMovimiento { get; set; }
 
         [ForeignKey("EmpleadosId")]
         public Guid EmpleadosId { get; set; }
-        public virtual Empleados Empleados { get; set; }
+        //public virtual Empleados Empleados { get; set; }
 
         [DisplayName("Cantidad")]
         public int Cantidad { get; set; }

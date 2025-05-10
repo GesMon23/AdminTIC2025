@@ -12,6 +12,7 @@ namespace Laboratorio1AdmonTIC.Models
 
 
         }
+        //public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<Municipio> Municipios { get; set; }
 
 		public DbSet<Departamento> Departamento { get; set; }
@@ -21,26 +22,26 @@ namespace Laboratorio1AdmonTIC.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relación uno a uno entre Empleado y ApplicationUser
-            modelBuilder.Entity<Empleados>()
-                .HasOne(e => e.User) // Un Empleado tiene un User
-                .WithOne(u => u.Empleados) // Un User tiene un Empleado
-                .HasForeignKey<Empleados>(e => e.UserId) // Especificamos que UserId es la FK
-                .OnDelete(DeleteBehavior.Restrict); // Opcional: controlar la eliminación (en caso de necesidad)
+            //// Relación uno a uno entre Empleado y ApplicationUser
+            //modelBuilder.Entity<Empleados>()
+            //    .HasOne(e => e.User) // Un Empleado tiene un User
+            //    .WithOne(u => u.Empleados) // Un User tiene un Empleado
+            //    .HasForeignKey<Empleados>(e => e.UserId) // Especificamos que UserId es la FK
+            //    .OnDelete(DeleteBehavior.Restrict); // Opcional: controlar la eliminación (en caso de necesidad)
 
             // Relación entre DetallesCompras y Compras
-            modelBuilder.Entity<DetallesCompras>()
-                .HasOne(d => d.Compras)
-                .WithMany()  // No hay navegación inversa en este caso
-                .HasForeignKey(d => d.CompraId)
-                .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
+        //    modelBuilder.Entity<DetallesCompras>()
+        //        .HasOne(d => d.Compras)
+        //        .WithMany()  // No hay navegación inversa en este caso
+        //        .HasForeignKey(d => d.CompraId)
+        //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
 
-            // Relación entre DetallesCompras y Productos
-            modelBuilder.Entity<DetallesCompras>()
-                .HasOne(d => d.Productos)
-                .WithMany()  // No hay navegación inversa en este caso
-                .HasForeignKey(d => d.ProductoId)
-                .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
+        //    // Relación entre DetallesCompras y Productos
+        //    modelBuilder.Entity<DetallesCompras>()
+        //        .HasOne(d => d.Productos)
+        //        .WithMany()  // No hay navegación inversa en este caso
+        //        .HasForeignKey(d => d.ProductoId)
+        //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
         }
 
         public DbSet<MetodosPago> MetodosPago { get; set; }

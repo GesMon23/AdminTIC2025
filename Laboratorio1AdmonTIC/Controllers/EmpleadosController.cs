@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Laboratorio1AdmonTIC.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
@@ -21,8 +23,22 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Empleados
         public async Task<IActionResult> Index()
         {
-            var eRPDbContext = _context.Empleados.Include(e => e.User);
-            return View(await eRPDbContext.ToListAsync());
+            //return View(await _context.Empleados.Where(c => !c.Inactivo).ToListAsync());
+            var empleados = await (from empl in _context.Empleados
+                                   join usuarios in _context.Users on empl.UserId equals usuarios.Id
+                                   where !empl.Inactivo
+                                   select new EmpleadosViewModels
+                                   {
+                                       EmpleadosId = empl.EmpleadosId,
+                                       Nombres = empl.Nombres,
+                                       Apellidos = empl.Apellidos,
+                                       Cargo = empl.Cargo,
+                                       Telefono = empl.Telefono,
+                                       Email = empl.Email,
+                                       Salario = empl.Salario,
+                                       Usuario = usuarios.UserName
+                                   }).ToListAsync();
+            return View(empleados);
         }
 
         // GET: Empleados/Details/5
@@ -34,7 +50,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var empleados = await _context.Empleados
-                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EmpleadosId == id);
             if (empleados == null)
             {
@@ -44,10 +59,39 @@ namespace Laboratorio1AdmonTIC.Controllers
             return View(empleados);
         }
 
+        public async Task<IActionResult> DetailsPartial(Guid id)
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+            var empleados = (from empl in _context.Empleados
+                                   join usuarios in _context.Users on empl.UserId equals usuarios.Id
+                                   where !empl.Inactivo && empl.EmpleadosId == id
+                                   select new EmpleadosViewModels
+                                   {
+                                       EmpleadosId = empl.EmpleadosId,
+                                       Nombres = empl.Nombres,
+                                       Apellidos = empl.Apellidos,
+                                       Cargo = empl.Cargo,
+                                       Telefono = empl.Telefono,
+                                       Email = empl.Email,
+                                       Salario = empl.Salario,
+                                       Usuario = usuarios.UserName
+                                   }).FirstOrDefault();
+
+            if (empleados == null)
+            {
+                Console.WriteLine("Empleado no encontrado.");
+                return NotFound();
+            }
+
+            //Console.WriteLine("Empleado encontrado, renderizando vista parcial.");
+
+            return PartialView("Details", empleados);
+        }
+
         // GET: Empleados/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName");
             return View();
         }
 
@@ -58,6 +102,12 @@ namespace Laboratorio1AdmonTIC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario,UserId")] Empleados empleados)
         {
+            if (_context.Empleados.Any(e => e.UserId == empleados.UserId))
+            {
+                TempData["ErrorEmpleado"] = "Este usuario ya tiene un empleado asignado.";
+                return RedirectToAction(nameof(Create));
+            }
+
             if (ModelState.IsValid)
             {
                 empleados.EmpleadosId = Guid.NewGuid();
@@ -65,7 +115,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName", empleados.UserId);
             return View(empleados);
         }
 
@@ -82,7 +132,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName", empleados.UserId);
             return View(empleados);
         }
 
@@ -93,6 +143,13 @@ namespace Laboratorio1AdmonTIC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("EmpleadosId,Nombres,Apellidos,Cargo,Telefono,Email,Salario,UserId")] Empleados empleados)
         {
+            if (_context.Empleados.Any(e => e.UserId == empleados.UserId && e.EmpleadosId != empleados.EmpleadosId))
+            {
+                TempData["ErrorEmpleado"] = "Este usuario ya tiene un empleado asignado.";
+                return RedirectToAction(nameof(Edit));
+            }
+
+
             if (id != empleados.EmpleadosId)
             {
                 return NotFound();
@@ -118,7 +175,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", empleados.UserId);
+            ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName", empleados.UserId);
             return View(empleados);
         }
 
@@ -131,7 +188,6 @@ namespace Laboratorio1AdmonTIC.Controllers
             }
 
             var empleados = await _context.Empleados
-                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.EmpleadosId == id);
             if (empleados == null)
             {

@@ -21,7 +21,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: MetodosPagoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MetodosPago.ToListAsync());
+            return View(await _context.MetodosPago.Where(c => !c.Inactivo).ToListAsync());
         }
 
         // GET: MetodosPagoes/Details/5
@@ -39,7 +39,7 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            return View(metodosPago);
+            return PartialView("Details", metodosPago);
         }
 
         // GET: MetodosPagoes/Create

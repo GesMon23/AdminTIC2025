@@ -21,7 +21,7 @@ namespace Laboratorio1AdmonTIC.Controllers
         // GET: Municipios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Municipios.ToListAsync());
+            return View(await _context.Municipios.Where(c => !c.Inactivo).ToListAsync());
         }
 
         // GET: Municipios/Details/5
