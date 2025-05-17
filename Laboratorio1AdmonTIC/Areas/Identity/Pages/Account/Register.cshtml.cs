@@ -29,10 +29,10 @@ namespace Laboratorio1AdmonTIC.Areas.Identity.Pages.Account
 
         private readonly ERPDbContext _context;
 
-        public RegisterModel(ERPDbContext context)
-        {
-            _context = context;
-        }
+        //public RegisterModel(ERPDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;

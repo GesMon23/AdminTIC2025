@@ -60,9 +60,11 @@ namespace Laboratorio1AdmonTIC.Controllers
                 tiposMovimiento.TipoMovimientoId = Guid.NewGuid();
                 _context.Add(tiposMovimiento);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Tipo de Movimiento registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(tiposMovimiento);
+            TempData["Error"] = "Ocurrio un error al guardar.";
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: TiposMovimientoes/Edit/5
@@ -90,7 +92,8 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id != tiposMovimiento.TipoMovimientoId)
             {
-                return NotFound();
+                TempData["Error"] = "Ocurrio un error al actualizar.";
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
 
             if (ModelState.IsValid)
@@ -104,16 +107,19 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!TiposMovimientoExists(tiposMovimiento.TipoMovimientoId))
                     {
-                        return NotFound();
+                        TempData["Error"] = "Ocurrio un error al actualizar.";
+                        return RedirectToAction(nameof(Edit), new { id = id });
                     }
                     else
                     {
                         throw;
                     }
                 }
+                TempData["Success"] = "Tipo de movimiento correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(tiposMovimiento);
+            TempData["Error"] = "Modelo invalido (faltan datos).";
+            return RedirectToAction(nameof(Edit), new { id = id });
         }
 
         // GET: TiposMovimientoes/Delete/5
@@ -121,14 +127,16 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var tiposMovimiento = await _context.TiposMovimiento
                 .FirstOrDefaultAsync(m => m.TipoMovimientoId == id);
             if (tiposMovimiento == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(tiposMovimiento);
@@ -136,6 +144,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             _context.Update(tiposMovimiento);
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Registro eliminado correctamente.";
             return RedirectToAction("Index");
         }
 

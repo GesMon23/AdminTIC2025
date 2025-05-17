@@ -9,6 +9,7 @@ namespace Laboratorio1AdmonTIC.Models
 		public Guid CategoriaId { get; set; }
 
 		[DisplayName("Nombre")]
+		[Required(ErrorMessage = "El nombre es obligatorio.")]
 		public string Nombre { get; set; }
 
 		[ScaffoldColumn(false)]

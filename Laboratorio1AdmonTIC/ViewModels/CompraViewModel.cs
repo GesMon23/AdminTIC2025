@@ -7,5 +7,7 @@
         public string Empleado { get; set; }
         public DateTime FechaCompra { get; set; }
         public double Total { get; set; }
+
     }
+
 }

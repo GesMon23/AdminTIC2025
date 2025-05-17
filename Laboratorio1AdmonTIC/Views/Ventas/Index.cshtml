@@ -6,9 +6,30 @@
 
 <h1>Ventas</h1>
 
-<p>
+<div class="d-flex justify-content-between">
     <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a>
-</p>
+    <a type="button" class="btn btn-inverse-info btn-fw btnAnulados">Ventas Anuladas</a>
+</div>
+<br />
+
+
+<!-- Modal Anulados -->
+<div class="modal fade" id="anuladosModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div style="background-color: #1c1e2f;" class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Ventas Anuladas</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body" id="anuladosContenido">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Detalles -->
 <div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="detalleLabel" aria-hidden="true">
@@ -59,10 +80,10 @@
                             {
                                 <tr>
                                     <td>
-                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.VentasId" data-toggle="tooltip" title="Editar">
+                                        @* <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.VentasId" data-toggle="tooltip" title="Editar">
                                             <i class="mdi mdi-pencil"></i>
-                                            @* Editar *@
-                                        </a>
+                                            Editar 
+                                        </a> *@
 
                                         <a type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.VentasId" data-toggle="tooltip" title="Detalles">
                                             <i class="mdi mdi-note-text"></i>
@@ -127,5 +148,24 @@
             });
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.btnAnulados').on('click', function () {
+
+                $('#anuladosContenido').load('/Ventas/Anulados', function (response, status, xhr) {
+                    if (status === "error") {
+                        $('#anuladosContenido').html('<p>No hay registros anulados.</p>');
+                    }
+                    $('#tablaAnulados').DataTable({
+                        language: {
+                            url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                        }
+                    });
+                });
+                $('#anuladosModal').modal('show');
+            });
+        });
     </script>
 }

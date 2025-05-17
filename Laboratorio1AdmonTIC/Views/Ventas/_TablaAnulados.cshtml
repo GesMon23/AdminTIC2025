@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Laboratorio1AdmonTIC.ViewModels.VentaViewModel>
+
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="table-responsive">
+            <table id="tablaAnulados" class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Cliente</th>
+                        <th>Empleado</th>
+                        <th>Fecha de Venta</th>
+                        <th>Metodo de Pago</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a href="javascript:void(0);" type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.VentasId" data-toggle="tooltip" title="Detalles">
+                                    <i class="mdi mdi-note-text"></i> @* Detalles *@
+                                </a>
+
+                                
+                                <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.VentasId" data-toggle="tooltip" title="Duplicar Venta">
+                                    <i class="mdi mdi-content-duplicate"></i>
+                                </a> 
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cliente)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Empleado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FechaVenta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TipoPago)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

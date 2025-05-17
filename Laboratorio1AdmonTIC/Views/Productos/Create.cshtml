@@ -17,13 +17,16 @@
                         <div class="form-group col-md-4">
                             <label asp-for="CategoriaId" class="control-label"></label>
                             @* <input asp-for="CategoriaId" class="form-control" /> *@
-                            <select style="height: 50px;" asp-for="CategoriaId" class="form-control" asp-items="ViewBag.Categorias"></select>
+                            <select style="height: 50px;" asp-for="CategoriaId" class="form-control" asp-items="ViewBag.Categorias">
+                                <option value="0" disabled selected>-- Seleccionar Producto --</option>
+                            </select>
                             <span asp-validation-for="CategoriaId" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label asp-for="ProveedorId" class="control-label"></label>
                             @* <input asp-for="ProveedorId" class="form-control" /> *@
                             <select style="height: 50px;" asp-for="ProveedorId" class="form-control" asp-items="ViewBag.Proveedores">
+                                <option value="0" disabled selected>-- Seleccionar Proveedor --</option>
                             </select>
                             <span asp-validation-for="ProveedorId" class="text-danger"></span>
                         </div>
@@ -42,12 +45,12 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label asp-for="PrecioCompra" class="control-label"></label>
-                            <input type="number" asp-for="PrecioCompra" class="form-control" step="0.01" />
+                            <input type="number" asp-for="PrecioCompra" class="form-control" id="precioCompra" step="0.01" min="0.01" required />
                             <span asp-validation-for="PrecioCompra" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label asp-for="PrecioVenta" class="control-label"></label>
-                            <input type="number" asp-for="PrecioVenta" class="form-control" step="0.01" />
+                            <input type="number" asp-for="PrecioVenta" class="form-control" id="precioVenta" step="0.01" min="0.01" required />
                             <span asp-validation-for="PrecioVenta" class="text-danger"></span>
                         </div>
                     </div>
@@ -55,12 +58,12 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label asp-for="Stock" class="control-label"></label>
-                            <input type="number" asp-for="Stock" class="form-control" />
+                            <input type="number" asp-for="Stock" class="form-control" id="stock" min="1" required />
                             <span asp-validation-for="Stock" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label asp-for="StockMinimo" class="control-label"></label>
-                            <input type="number" asp-for="StockMinimo" class="form-control" />
+                            <input type="number" asp-for="StockMinimo" class="form-control" id="stockMinimo" min="1" required />
                             <span asp-validation-for="StockMinimo" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -98,5 +101,42 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        const campoPrecioCompra = document.getElementById("precioCompra");
+        const campoPrecioVenta = document.getElementById("precioVenta");
+        const campoStock = document.getElementById("stock");
+        const campoStockMinimo = document.getElementById("stockMinimo");
+
+        campoPrecioCompra.addEventListener("input", function () {
+            const valor = parseFloat(this.value);
+
+            if (isNaN(valor) || valor < 0.01) {
+                this.value = "";
+            }
+        });
+        campoPrecioVenta.addEventListener("input", function () {
+            const valor = parseFloat(this.value);
+
+            if (isNaN(valor) || valor < 0.01) {
+                this.value = "";
+            }
+        });
+        campoStock.addEventListener("input", function () {
+            const valor = parseInt(this.value);
+
+            if (isNaN(valor) || valor < 1) {
+                this.value = "";
+            }
+        });
+        campoStockMinimo.addEventListener("input", function () {
+            const valor = parseInt(this.value);
+
+            if (isNaN(valor) || valor < 0.01) {
+                this.value = "";
+            }
+        });
+    </script>
+    
 
 }
+

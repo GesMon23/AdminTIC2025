@@ -37,7 +37,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("CategoriaId");
 
-                    b.ToTable("CategoriasProducto");
+                    b.ToTable("CategoriasProducto", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Clientes", b =>
@@ -77,7 +77,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("ClienteId");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Compras", b =>
@@ -110,7 +110,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("ProveedoresProveedorId");
 
-                    b.ToTable("Compras");
+                    b.ToTable("Compras", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Departamento", b =>
@@ -130,7 +130,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("DepartamentoId");
 
-                    b.ToTable("Departamento");
+                    b.ToTable("Departamento", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesCompras", b =>
@@ -163,7 +163,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("ProductoId");
 
-                    b.ToTable("DetallesCompras");
+                    b.ToTable("DetallesCompras", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.DetallesVenta", b =>
@@ -199,7 +199,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("VentasId");
 
-                    b.ToTable("DetallesVenta");
+                    b.ToTable("DetallesVenta", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Empleados", b =>
@@ -242,7 +242,7 @@ namespace Laboratorio1AdmonTIC.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Empleados");
+                    b.ToTable("Empleados", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Inventario", b =>
@@ -283,7 +283,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("TiposMovimientoTipoMovimientoId");
 
-                    b.ToTable("Inventario");
+                    b.ToTable("Inventario", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.MetodosPago", b =>
@@ -301,7 +301,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("MetodoId");
 
-                    b.ToTable("MetodosPago");
+                    b.ToTable("MetodosPago", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Municipio", b =>
@@ -327,7 +327,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("DepartamentoId");
 
-                    b.ToTable("Municipios");
+                    b.ToTable("Municipios", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Productos", b =>
@@ -380,7 +380,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("ProveedoresProveedorId");
 
-                    b.ToTable("Productos");
+                    b.ToTable("Productos", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Proveedores", b =>
@@ -410,7 +410,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("ProveedorId");
 
-                    b.ToTable("Proveedores");
+                    b.ToTable("Proveedores", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.TiposMovimiento", b =>
@@ -428,7 +428,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasKey("TipoMovimientoId");
 
-                    b.ToTable("TiposMovimiento");
+                    b.ToTable("TiposMovimiento", (string)null);
                 });
 
             modelBuilder.Entity("Laboratorio1AdmonTIC.Models.Ventas", b =>
@@ -469,7 +469,7 @@ namespace Laboratorio1AdmonTIC.Migrations
 
                     b.HasIndex("MetodosPagoMetodoId");
 
-                    b.ToTable("Ventas");
+                    b.ToTable("Ventas", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -1,10 +1,72 @@
-﻿@model Laboratorio1AdmonTIC.Models.Ventas
+﻿@model Laboratorio1AdmonTIC.ViewModels.DetallesInsertVentasViewModel;
 
 @{
     ViewData["Title"] = "Create";
 }
 
 <h1>Nuevo</h1>
+
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" role="dialog" aria-labelledby="modalAgregarProductoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Productos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Producto</label>
+                            <select style="height: 50px;" class="form-control" id="ProductoId">
+                                <option value="0" disabled selected>-- Seleccionar Producto --</option>
+                                @foreach (var producto in ViewBag.Producto)
+                                {
+                                    <option value="@producto.ProductoId">@producto.Nombre</option>
+                                }
+                            </select>
+
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" min="1" required/>
+                            <span class="text-danger"></span>
+                        </div>
+                    
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @* <input type="text" id="totalGeneral" class="form-control" readonly style="background-color: #2b2e4c; color: #f8f9fa;" /> *@
+                                <h6 class="control-label">Stock: <span id="stockbd" style="font-weight: bold;"></span></h6>
+                                @* <input type="hidden" name="Total"  /> *@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Precio Unitario</label>
+                            <input type="number" class="form-control" id="precio"  style="background-color: #2b2e4c; color: #f8f9fa;" readonly/>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Subtotal</label>
+                            <input class="form-control" style="background-color: #2b2e4c; color: #f8f9fa;" id="subtotal" readonly />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div
+                    <div class="form-group">
+                        <button type="button" class="btn btn-inverse-success btn-fw me-2" id="btnAgregarDetalle">Agregar</button>
+                        @* <a class="btn btn-inverse-secondary btn-fw" type="button" asp-action="Index">Regresar</a> *@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="card">
     <div class="card-body">
@@ -15,38 +77,89 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
 
-                        <div class="form-group col-md-4">
-                            <label asp-for="ClienteId" class="control-label"></label>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Ventas.ClienteId" class="control-label"></label>
                             @* <input asp-for="ClienteId" class="form-control" /> *@
-                            <select style="height: 50px;" asp-for="ClienteId" class="form-control" asp-items="ViewBag.Clientes"></select>
-                            <span asp-validation-for="ClienteId" class="text-danger"></span>
+                            <select style="height: 50px;" asp-for="Ventas.ClienteId" class="form-control" asp-items="ViewBag.Clientes">
+                                <option value="0" disabled selected>-- Seleccionar Cliente --</option>
+                            </select>
+                            <span asp-validation-for="Ventas.ClienteId" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label asp-for="EmpleadosId" class="control-label"></label>
-                            @* <select asp-for="EmpleadosId" class="form-control" asp-items="ViewBag.EmpleadosId"></select> *@
-                            <select style="height: 50px;" asp-for="EmpleadosId" class="form-control" asp-items="ViewBag.Empleados"></select>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Ventas.EmpleadosId" class="control-label"></label>
+                            <select style="height: 50px;" asp-for="Ventas.EmpleadosId" class="form-control" asp-items="ViewBag.Empleados">
+                                <option value="0" disabled selected>-- Seleccionar Empleado --</option>
+                            </select>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label asp-for="MetodoId" class="control-label"></label>
+                       
+                    </div>
+
+                    <div class="row">
+                        @* <div class="form-group col-md-4">
+                            <label asp-for="Ventas.FechaVenta" class="control-label"></label>
+                            <input asp-for="Ventas.FechaVenta" class="form-control" />
+                            <span asp-validation-for="Ventas.FechaVenta" class="text-danger"></span>
+                        </div> *@
+                         <div class="form-group col-md-6">
+                            <label asp-for="Ventas.MetodoId" class="control-label"></label>
                             @* <input asp-for="MetodoId" class="form-control" /> *@
-                            <select style="height: 50px;" asp-for="MetodoId" class="form-control" asp-items="ViewBag.MetodoPago"></select>
-                            <span asp-validation-for="MetodoId" class="text-danger"></span>
+                            <select style="height: 50px;" asp-for="Ventas.MetodoId" class="form-control" asp-items="ViewBag.MetodoPago">
+                                <option value="0" disabled selected>-- Seleccionar Metodo de Pago --</option>
+                            </select>
+                            <span asp-validation-for="Ventas.MetodoId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Listado de Productos</label>
+                            <br />
+                            <button type="button" class="form-control btn btn-outline-secondary btn-icon-text" data-toggle="modal" data-target="#modalAgregarProducto">
+                                <i class="mdi mdi-shopping"></i>
+                                Agregar Productos
+                            </button>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-4">
-                            <label asp-for="FechaVenta" class="control-label"></label>
-                            <input asp-for="FechaVenta" class="form-control" />
-                            <span asp-validation-for="FechaVenta" class="text-danger"></span>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table" id="tablaDetalles">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio Unitario</th>
+                                            <th>Subtotal</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                         </div>
+                    </div>
+
+                    @* <div class="row">
                         <div class="form-group col-md-4">
                             <label asp-for="Total" class="control-label"></label>
                             <input type="number" asp-for="Total" class="form-control" />
                             <span asp-validation-for="Total" class="text-danger"></span>
                         </div>
+                    </div> *@
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <br />
+                                @* <input type="text" id="totalGeneral" class="form-control" readonly style="background-color: #2b2e4c; color: #f8f9fa;" /> *@
+                                <h4 class="control-label">Total: <span id="totalGeneral" style="font-weight: bold;"></span></h4>
+                                @* <input type="hidden" name="Total"  /> *@
+                                <input type="hidden" asp-for="Ventas.Total" class="form-control" id="totalHidden" />
+                                <span asp-validation-for="Ventas.Total" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    
+
+
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-inverse-success btn-fw me-2" />
                         <a class="btn btn-inverse-secondary btn-fw" type="button" asp-action="Index">Regresar</a>
@@ -61,4 +174,226 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <script>
+        const campoCantidad = document.getElementById("cantidad");
+
+        campoCantidad.addEventListener("input", function () {
+            const valor = parseInt(this.value);
+
+            if (isNaN(valor) || valor < 1) {
+                this.value = "";
+            }
+        });
+
+         $(document).ready(function () {
+            // Función principal de validación
+            function validarCantidadVsStock() {
+                var cantidad = parseInt($('#cantidad').val());
+                var stock = parseInt($('#stockbd').text());
+
+                // Si ambos son números válidos
+                if (!isNaN(cantidad) && !isNaN(stock)) {
+                    if (cantidad > stock) {
+                        // Bloquea el botón y cambia colores
+                        $('#btnAgregarDetalle')
+                            .prop('disabled', true)
+                            .removeClass('btn-inverse-success')
+                            .addClass('btn-inverse-danger');
+
+                        $('#stockbd').css('color', 'red');
+                    } else {
+                        // Habilita el botón y restablece colores
+                        $('#btnAgregarDetalle')
+                            .prop('disabled', false)
+                            .removeClass('btn-inverse-danger')
+                            .addClass('btn-inverse-success');
+
+                        $('#stockbd').css('color', 'white');
+                    }
+                } else {
+                    // Si no hay cantidad o stock válido, siempre bloquea por seguridad
+                    $('#btnAgregarDetalle')
+                        .prop('disabled', true)
+                        .removeClass('btn-inverse-success')
+                        .addClass('btn-inverse-danger');
+
+                    $('#stockbd').css('color', 'red');
+                }
+            }
+
+            // Disparar cada vez que cambie el campo cantidad
+            $('#cantidad').on('input', validarCantidadVsStock);
+
+            // También cuando cambie el producto (por si cambian el stock dinámicamente)
+            $('#ProductoId').on('change', validarCantidadVsStock);
+
+            // Al abrir el modal limpiar estilos y bloquear hasta que la cantidad sea válida
+            $('#modalAgregarProducto').on('show.bs.modal', function () {
+                $('#btnAgregarDetalle')
+                    .prop('disabled', true)
+                    .removeClass('btn-inverse-danger')
+                    .addClass('btn-inverse-success');
+
+                $('#stockbd').css('color', 'white');
+                $('#cantidad').val('');
+            });
+
+        });
+
+    </script>
+
+    <script>
+        const obtenerPrecioUrl = '@Url.Action("ObtenerPrecio", "Ventas")';
+        const obtenerStockUrl = '@Url.Action("ObtenerStock", "Ventas")';
+        let detalles = [];
+
+        function actualizarSubtotal() {
+            const cantidad = parseFloat(document.getElementById("cantidad").value) || 0;
+            const precio = parseFloat(document.getElementById("precio").value) || 0;
+            document.getElementById("subtotal").value = (cantidad * precio).toFixed(2);
+        }
+
+        function actualizarTotalGeneral() {
+            let total = 0;
+            detalles.forEach(d => {
+                total += parseFloat(d.subtotal) || 0;
+            });
+            document.getElementById('totalGeneral').textContent = total.toFixed(2);
+            document.getElementById('totalHidden').value = total.toFixed(2);
+        }
+
+        
+
+        document.getElementById("ProductoId").addEventListener("change", function () {
+            const id = this.value;
+            if (!id) return;
+
+            fetch(`${obtenerPrecioUrl}?idProducto=${id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("No se pudo obtener el precio");
+                    return res.json();
+                })
+                .then(data => {
+                    document.getElementById("precio").value = data.precio;
+                    actualizarSubtotal();
+                })
+                .catch(error => {
+                    console.error("Error al obtener precio:", error);
+                });
+           
+                // Obtener stock
+            fetch(`${obtenerStockUrl}?idProducto=${id}`)
+                .then(res => {
+                    if (!res.ok) throw new Error("No se pudo obtener el stock");
+                    return res.json();
+                })
+                .then(data => {
+                    document.getElementById("stockbd").textContent = data.stock;
+                })
+                .catch(error => {
+                    console.error("Error al obtener stock:", error);
+                });
+        });
+
+        document.getElementById("cantidad").addEventListener("input", actualizarSubtotal);
+
+        document.getElementById("btnAgregarDetalle").addEventListener("click", function () {
+            const select = document.getElementById("ProductoId");
+            const productoId = select.value;
+            const productoNombre = select.options[select.selectedIndex].text;
+            const cantidad = document.getElementById("cantidad").value;
+            const precio = document.getElementById("precio").value;
+            const subtotal = document.getElementById("subtotal").value;
+
+            if (!productoId || !cantidad) return alert("Completa todos los campos");
+
+            const index = detalles.length;
+
+            const fila = `
+                <tr>
+                    <td>
+                        ${productoNombre}
+                        <input type="hidden" name="DetallesVentas[${index}].ProductoId" value="${productoId}" />
+                    </td>
+                    <td>
+                        ${cantidad}
+                        <input type="hidden" name="DetallesVentas[${index}].Cantidad" value="${cantidad}" />
+                    </td>
+                    <td>
+                        ${precio}
+                        <input type="hidden" name="DetallesVentas[${index}].PrecioUnitario" value="${precio}" />
+                    </td>
+                    <td>
+                        ${subtotal}
+                        <input type="hidden" name="DetallesVentas[${index}].Total" value="${subtotal}" />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-inverse-danger me-2 py-2 px-3 btnEliminarDetalle" onclick="eliminarDetalle(this)"><i class="mdi mdi-delete"></i></button>
+                    </td>
+                </tr>
+            `;
+
+            detalles.push({ productoId, cantidad, precio, subtotal });
+            document.querySelector("#tablaDetalles tbody").insertAdjacentHTML("beforeend", fila);
+
+            // Resetear campos
+            document.getElementById("cantidad").value = '';
+            document.getElementById("precio").value = '';
+            document.getElementById("subtotal").value = '';
+            actualizarTotalGeneral();
+        });
+        function eliminarDetalle(btn) {
+            const row = btn.closest('tr');
+            const index = row.rowIndex - 1; 
+
+           
+            detalles.splice(index, 1);
+            row.remove();
+
+            
+            reindexarCampos();
+            actualizarTotalGeneral();
+        }
+
+        function reindexarCampos() {
+        const filas = document.querySelectorAll("#tablaDetalles tbody tr");
+        detalles = [];
+
+        filas.forEach((fila, i) => {
+            const inputs = fila.querySelectorAll("input[type=hidden]");
+            const values = {};
+
+            inputs.forEach(input => {
+                const name = input.name;
+                const value = input.value;
+
+                if (name.includes(".ProductoId")) {
+                    input.name = `DetallesVentas[${i}].ProductoId`;
+                    values.productoId = value;
+                } else if (name.includes(".Cantidad")) {
+                    input.name = `DetallesVentas[${i}].Cantidad`;
+                    values.cantidad = value;
+                } else if (name.includes(".PrecioUnitario")) {
+                    input.name = `DetallesVentas[${i}].PrecioUnitario`;
+                    values.precio = value;
+                } else if (name.includes(".Total")) {
+                    input.name = `DetallesVentas[${i}].Total`;
+                    values.subtotal = value;
+                }
+            });
+
+            detalles.push(values);
+
+        });
+}
+
+
+    </script>
 }

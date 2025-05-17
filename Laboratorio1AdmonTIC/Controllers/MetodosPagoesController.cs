@@ -60,9 +60,11 @@ namespace Laboratorio1AdmonTIC.Controllers
                 metodosPago.MetodoId = Guid.NewGuid();
                 _context.Add(metodosPago);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Metodo de Pago registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(metodosPago);
+            TempData["Error"] = "Ocurrio un error al guardar.";
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: MetodosPagoes/Edit/5
@@ -90,7 +92,8 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id != metodosPago.MetodoId)
             {
-                return NotFound();
+                TempData["Error"] = "Ocurrio un error al actualizar.";
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
 
             if (ModelState.IsValid)
@@ -104,16 +107,19 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!MetodosPagoExists(metodosPago.MetodoId))
                     {
-                        return NotFound();
+                        TempData["Error"] = "Ocurrio un error al actualizar.";
+                        return RedirectToAction(nameof(Edit), new { id = id });
                     }
                     else
                     {
                         throw;
                     }
                 }
+                TempData["Success"] = "Metodo de pago actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(metodosPago);
+            TempData["Error"] = "Modelo invalido (faltan datos).";
+            return RedirectToAction(nameof(Edit), new { id = id });
         }
 
         // GET: MetodosPagoes/Delete/5
@@ -121,14 +127,16 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var metodosPago = await _context.MetodosPago
                 .FirstOrDefaultAsync(m => m.MetodoId == id);
             if (metodosPago == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(metodosPago);
@@ -136,6 +144,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             _context.Update(metodosPago);
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Registro eliminado correctamente.";
             return RedirectToAction("Index");
         }
 

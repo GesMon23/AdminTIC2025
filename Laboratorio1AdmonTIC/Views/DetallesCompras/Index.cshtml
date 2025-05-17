@@ -7,7 +7,7 @@
 <h1>Detalles Compras</h1>
 
 <p>
-    <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a>
+    @* <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a> *@
 </p>
 
 <!-- Modal Detalles -->
@@ -59,22 +59,22 @@
                             {
                                 <tr>
                                     <td>
-                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.DetalleCompraId" data-toggle="tooltip" title="Editar">
+                                       @*  <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.DetalleCompraId" data-toggle="tooltip" title="Editar">
                                             <i class="mdi mdi-pencil"></i>
-                                            @* Editar *@
-                                        </a>
+                                            Editar 
+                                        </a> *@
 
                                         <a type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.DetalleCompraId" data-toggle="tooltip" title="Detalles">
                                             <i class="mdi mdi-note-text"></i>
                                             @* Detalles *@
                                         </a>
 
-                                        <a href="@Url.Action("Delete", new { id = item.DetalleCompraId })"
+                                        @* <a href="@Url.Action("Delete", new { id = item.DetalleCompraId })"
                                            class="btn btn-inverse-danger me-2 py-2 px-3"
                                            onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = item.DetalleCompraId })')" data-toggle="tooltip" title="Eliminar">
                                             <i class="mdi mdi-delete"></i>
-                                            @* Eliminar *@
-                                        </a>
+                                            Eliminar
+                                        </a> *@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CompraId)

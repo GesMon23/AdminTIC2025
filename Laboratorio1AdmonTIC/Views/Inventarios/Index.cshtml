@@ -7,7 +7,7 @@
 <h1>Inventario</h1>
 
 <p>
-    <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a>
+    @* <a type="button" class="btn btn-inverse-success btn-fw" asp-action="Create">Nuevo Registro</a> *@
 </p>
 
 <!-- Modal Detalles -->
@@ -36,6 +36,7 @@
                         <thead>
                             <tr>
                                 <th></th>
+                                
                                 <th>
                                     @Html.DisplayNameFor(model => model.ProductoNombre)
                                 </th>
@@ -59,22 +60,22 @@
                             {
                                 <tr>
                                     <td>
-                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.MovimientoId" data-toggle="tooltip" title="Editar">
+                                        @* <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@item.MovimientoId" data-toggle="tooltip" title="Editar">
                                             <i class="mdi mdi-pencil"></i>
-                                            @* Editar *@
-                                        </a>
+                                            Editar 
+                                        </a> *@
 
                                         <a type="button" class="btn btn-inverse-info me-2 py-2 px-3 btn-detalle" data-id="@item.MovimientoId" data-toggle="tooltip" title="Detalles">
                                             <i class="mdi mdi-note-text"></i>
                                             @* Detalles *@
                                         </a>
 
-                                        <a href="@Url.Action("Delete", new { id = item.MovimientoId })"
+                                        @* <a href="@Url.Action("Delete", new { id = item.MovimientoId })"
                                            class="btn btn-inverse-danger me-2 py-2 px-3"
                                            onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = item.MovimientoId })')" data-toggle="tooltip" title="Eliminar">
                                             <i class="mdi mdi-delete"></i>
-                                            @* Eliminar *@
-                                        </a>
+                                            eliminar
+                                        </a> *@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ProductoNombre)

@@ -65,9 +65,11 @@ namespace Laboratorio1AdmonTIC.Controllers
                 proveedores.ProveedorId = Guid.NewGuid();
                 _context.Add(proveedores);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Proveedor registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(proveedores);
+            TempData["Error"] = "Ocurrio un error al guardar.";
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: Proveedores/Edit/5
@@ -95,7 +97,8 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id != proveedores.ProveedorId)
             {
-                return NotFound();
+                TempData["Error"] = "Ocurrio un error al actualizar.";
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
 
             if (ModelState.IsValid)
@@ -109,16 +112,19 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!ProveedoresExists(proveedores.ProveedorId))
                     {
-                        return NotFound();
+                        TempData["Error"] = "Ocurrio un error al actualizar.";
+                        return RedirectToAction(nameof(Edit), new { id = id });
                     }
                     else
                     {
                         throw;
                     }
                 }
+                TempData["Success"] = "Categoría actualizada correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(proveedores);
+            TempData["Error"] = "Modelo invalido (faltan datos).";
+            return RedirectToAction(nameof(Edit), new { id = id });
         }
 
         // GET: Proveedores/Delete/5
@@ -126,20 +132,24 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var proveedores = await _context.Proveedores
                 .FirstOrDefaultAsync(m => m.ProveedorId == id);
             if (proveedores == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(proveedores);
             proveedores.Inactivo = true;
             _context.Update(proveedores);
             await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Registro eliminado correctamente.";
 
             return RedirectToAction("Index");
         }

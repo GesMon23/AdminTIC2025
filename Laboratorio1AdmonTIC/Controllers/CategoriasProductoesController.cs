@@ -79,10 +79,13 @@ namespace Laboratorio1AdmonTIC.Controllers
                 categoriasProducto.CategoriaId = Guid.NewGuid();
                 _context.Add(categoriasProducto);
                 await _context.SaveChangesAsync();
+
+                TempData["Success"] = "Categoría registrada correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(categoriasProducto);
-        }
+			TempData["Error"] = "Ocurrio un error al guardar.";
+			return RedirectToAction(nameof(Create));
+		}
 
         // GET: CategoriasProductoes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -109,10 +112,11 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id != categoriasProducto.CategoriaId)
             {
-                return NotFound();
-            }
+				TempData["Error"] = "Ocurrio un error al actualizar.";
+                return RedirectToAction(nameof(Edit), new { id = id });
+			}
 
-            if (ModelState.IsValid)
+			if (ModelState.IsValid)
             {
                 try
                 {
@@ -123,32 +127,39 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!CategoriasProductoExists(categoriasProducto.CategoriaId))
                     {
-                        return NotFound();
-                    }
-                    else
+						TempData["Error"] = "Ocurrio un error al actualizar.";
+						return RedirectToAction(nameof(Edit), new { id = id });
+
+					}
+					else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+				TempData["Success"] = "Categoría actualizada correctamente.";
+				return RedirectToAction(nameof(Index));
             }
-            return View(categoriasProducto);
-        }
+			TempData["Error"] = "Modelo invalido (faltan datos).";
+			return RedirectToAction(nameof(Edit), new { id = id });
 
-        // GET: CategoriasProductoes/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+		}
+
+		// GET: CategoriasProductoes/Delete/5
+		public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
-                return NotFound();
+				TempData["Error"] = "Id no válido.";
+				return RedirectToAction(nameof(Index));
             }
 
             var categoriasProducto = await _context.CategoriasProducto
                 .FirstOrDefaultAsync(m => m.CategoriaId == id);
             if (categoriasProducto == null)
             {
-                return NotFound();
-            }
+				TempData["Error"] = "Registro no encontrado.";
+				return RedirectToAction(nameof(Index));
+			}
 
             //return View(categoriasProducto);
 
@@ -156,7 +167,9 @@ namespace Laboratorio1AdmonTIC.Controllers
             _context.Update(categoriasProducto);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+			TempData["Success"] = "Registro eliminado correctamente.";
+
+			return RedirectToAction("Index");
         }
 
         // POST: CategoriasProductoes/Delete/5
@@ -168,7 +181,12 @@ namespace Laboratorio1AdmonTIC.Controllers
             if (categoriasProducto != null)
             {
                 _context.CategoriasProducto.Remove(categoriasProducto);
+                TempData["Success"] = "Registro eliminado Correctamente.";
             }
+            else {
+				TempData["Error"] = "Ocurrio un error al eliminar el registro.";
+				return RedirectToAction(nameof(Index));
+			}
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

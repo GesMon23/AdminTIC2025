@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Laboratorio1AdmonTIC.ViewModels;
 
 namespace Laboratorio1AdmonTIC.Models
 {
@@ -26,6 +27,11 @@ namespace Laboratorio1AdmonTIC.Models
 
         [ScaffoldColumn(false)]
         public bool Inactivo { get; set; }
+
+
+
+
+        //public List<traerAnulados> DetallesCompras { get; set; }
 
     }
 }

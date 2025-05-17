@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Laboratorio1AdmonTIC.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,18 +31,18 @@ namespace Laboratorio1AdmonTIC.Models
             //    .OnDelete(DeleteBehavior.Restrict); // Opcional: controlar la eliminación (en caso de necesidad)
 
             // Relación entre DetallesCompras y Compras
-        //    modelBuilder.Entity<DetallesCompras>()
-        //        .HasOne(d => d.Compras)
-        //        .WithMany()  // No hay navegación inversa en este caso
-        //        .HasForeignKey(d => d.CompraId)
-        //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
+            //    modelBuilder.Entity<DetallesCompras>()
+            //        .HasOne(d => d.Compras)
+            //        .WithMany()  // No hay navegación inversa en este caso
+            //        .HasForeignKey(d => d.CompraId)
+            //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
 
-        //    // Relación entre DetallesCompras y Productos
-        //    modelBuilder.Entity<DetallesCompras>()
-        //        .HasOne(d => d.Productos)
-        //        .WithMany()  // No hay navegación inversa en este caso
-        //        .HasForeignKey(d => d.ProductoId)
-        //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
+            //    // Relación entre DetallesCompras y Productos
+            //    modelBuilder.Entity<DetallesCompras>()
+            //        .HasOne(d => d.Productos)
+            //        .WithMany()  // No hay navegación inversa en este caso
+            //        .HasForeignKey(d => d.ProductoId)
+            //        .OnDelete(DeleteBehavior.Restrict);  // Desactivar eliminación en cascada
         }
 
         public DbSet<MetodosPago> MetodosPago { get; set; }

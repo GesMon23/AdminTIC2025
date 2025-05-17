@@ -1,4 +1,4 @@
-﻿@model Laboratorio1AdmonTIC.ViewModels.VentaViewModel
+﻿@model Laboratorio1AdmonTIC.ViewModels.DetallesVViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,45 +11,89 @@
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.VentasId)
+                Venta Id:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.VentasId)
+                @Html.DisplayFor(model => model.Venta.VentasId)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Cliente)
+                Cliente:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Cliente)
+                @Html.DisplayFor(model => model.Venta.Cliente)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Empleado)
+                Empleado:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Empleado)
+                @Html.DisplayFor(model => model.Venta.Empleado)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TipoPago)
+                Tipo de pago:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TipoPago)
+                @Html.DisplayFor(model => model.Venta.TipoPago)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaVenta)
+                Fecha de Venta:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaVenta)
+                @Html.DisplayFor(model => model.Venta.FechaVenta)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Total)
+                Total:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Total)
+                @Html.DisplayFor(model => model.Venta.Total)
             </dd>
         </dl>
-        <div>
-            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.VentasId">Editar</a>
-            <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table" id="tablaDetalles">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Detalles.Count; i++)
+                            {
+                                var item = Model.Detalles[i];
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Producto)
+                                        <input type="hidden" name="Detalles[@i].productoId" value="@item.productoId" />
+                                        @* <input type="hidden" name="DetallesCompras[@i].nombreProducto" value="@item.Producto" /> *@
+                                    </td>
+                                    <td>
+                                        @item.Cantidad
+                                        <input type="hidden" name="Detalles[@i].Cantidad" value="@item.Cantidad" />
+                                    </td>
+                                    <td>
+                                        @item.PrecioUnitario
+                                        <input type="hidden" name="Detalles[@i].PrecioUnitario" value="@item.PrecioUnitario" />
+                                    </td>
+                                    <td>
+                                        @item.Total
+                                        <input type="hidden" name="Detalles[@i].Total" value="@item.Total" />
+                                    </td>
+
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>@* 
+            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.VentasId">Editar</a> *@
+            @* <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a> *@
         </div>
     </div>
 </div>

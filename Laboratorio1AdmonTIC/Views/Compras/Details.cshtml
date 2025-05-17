@@ -1,4 +1,4 @@
-﻿@model Laboratorio1AdmonTIC.ViewModels.CompraViewModel
+﻿@model Laboratorio1AdmonTIC.ViewModels.DetallesCviewModel;
 
 @{
     ViewData["Title"] = "Details";
@@ -12,39 +12,84 @@
         <hr />
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CompraId)
+                Compra Id:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CompraId)
+                @Html.DisplayFor(model => model.Compra.CompraId)
             </dd>
             <dt class="col-sm-2">
-                Proveedor
+                Proveedor:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Proveedor)
+                @Html.DisplayFor(model => model.Compra.Proveedor)
             </dd>
             <dt class="col-sm-2">
-                Empleado
+                Empleado:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Empleado)
+                @Html.DisplayFor(model => model.Compra.Empleado)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FechaCompra)
+                Fecha de Compra:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.FechaCompra)
+                @Html.DisplayFor(model => model.Compra.FechaCompra)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Total)
+                Total:
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Total)
+                @Html.DisplayFor(model => model.Compra.Total)
             </dd>
         </dl>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table" id="tablaDetalles">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Detalles.Count; i++)
+                            {
+                                var item = Model.Detalles[i];
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Producto)
+                                        <input type="hidden" name="Detalles[@i].productoId" value="@item.productoId" />
+                                        @* <input type="hidden" name="DetallesCompras[@i].nombreProducto" value="@item.Producto" /> *@
+                                    </td>
+                                    <td>
+                                        @item.Cantidad
+                                        <input type="hidden" name="Detalles[@i].Cantidad" value="@item.Cantidad" />
+                                    </td>
+                                    <td>
+                                        @item.PrecioUnitario
+                                        <input type="hidden" name="Detalles[@i].PrecioUnitario" value="@item.PrecioUnitario" />
+                                    </td>
+                                    <td>
+                                        @item.Total
+                                        <input type="hidden" name="Detalles[@i].Total" value="@item.Total" />
+                                    </td>
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <div>
-            <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.CompraId">Editar</a>
-            <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a>
+            @* <a class="btn btn-inverse-info btn-fw me-2" asp-action="Edit" asp-route-id="@Model?.CompraId">Editar</a> *@
+            @* <a class="btn btn-inverse-secondary btn-fw" asp-action="Index">Regresar</a> *@
         </div>
     </div>
 </div>

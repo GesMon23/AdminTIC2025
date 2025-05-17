@@ -59,10 +59,11 @@ namespace Laboratorio1AdmonTIC.Controllers
             {
                 clientes.ClienteId = Guid.NewGuid();
                 _context.Add(clientes);
-                await _context.SaveChangesAsync();
+                TempData["Success"] = "Cliente registrado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            TempData["Error"] = "Ocurrio un error al guardar.";
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: Clientes/Edit/5
@@ -90,7 +91,8 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id != clientes.ClienteId)
             {
-                return NotFound();
+                TempData["Error"] = "Ocurrio un error no se encontro el id.";
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
 
             if (ModelState.IsValid)
@@ -104,16 +106,19 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!ClientesExists(clientes.ClienteId))
                     {
-                        return NotFound();
+                        TempData["Error"] = "Ocurrio un error al actualizar.";
+                        return RedirectToAction(nameof(Edit), new { id = id });
                     }
                     else
                     {
                         throw;
                     }
                 }
+                TempData["Success"] = "Cliente actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(clientes);
+            TempData["Error"] = "Modelo invalido (faltan datos).";
+            return RedirectToAction(nameof(Edit), new { id = id });
         }
 
         // GET: Clientes/Delete/5
@@ -121,20 +126,23 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var clientes = await _context.Clientes
                 .FirstOrDefaultAsync(m => m.ClienteId == id);
             if (clientes == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(clientes);
             clientes.Inactivo = true;
             _context.Update(clientes);
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Registro eliminado correctamente.";
 
             return RedirectToAction("Index");
         }

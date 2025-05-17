@@ -136,12 +136,14 @@ namespace Laboratorio1AdmonTIC.Controllers
                 productos.ProductoId = Guid.NewGuid();
 				_context.Add(productos);
 				await _context.SaveChangesAsync();
+				TempData["Success"] = "Producto registrado correctamente.";
 				return RedirectToAction(nameof(Index));
 			}
 
             ViewBag.Categorias = new SelectList(_context.CategoriasProducto.Where(c => !c.Inactivo), "CategoriaId", "Nombre");
             ViewBag.Proveedores = new SelectList(_context.Proveedores.Where(p => !p.Inactivo), "ProveedorId", "Nombre");
-            return View(productos);
+			TempData["Error"] = "Ocurrio un error al guardar.";
+			return RedirectToAction(nameof(Create));
 		}
 
 		// GET: Productos/Edit/5
@@ -172,7 +174,8 @@ namespace Laboratorio1AdmonTIC.Controllers
 		{
 			if (id != productos.ProductoId)
 			{
-				return NotFound();
+				TempData["Error"] = "Ocurrio un error al actualizar.";
+				return RedirectToAction(nameof(Edit), new { id = id });
 			}
 
 			if (ModelState.IsValid)
@@ -186,16 +189,19 @@ namespace Laboratorio1AdmonTIC.Controllers
 				{
 					if (!ProductosExists(productos.ProductoId))
 					{
-						return NotFound();
+						TempData["Error"] = "Ocurrio un error al actualizar.";
+						return RedirectToAction(nameof(Edit), new { id = id });
 					}
 					else
 					{
 						throw;
 					}
 				}
+				TempData["Success"] = "Producto actualizado correctamente.";
 				return RedirectToAction(nameof(Index));
 			}
-			return View(productos);
+			TempData["Error"] = "Modelo invalido (faltan datos).";
+			return RedirectToAction(nameof(Edit), new { id = id });
 		}
 
 		// GET: Productos/Delete/5
@@ -203,20 +209,24 @@ namespace Laboratorio1AdmonTIC.Controllers
 		{
 			if (id == null)
 			{
-				return NotFound();
+				TempData["Error"] = "Id no válido.";
+				return RedirectToAction(nameof(Index));
 			}
 
 			var productos = await _context.Productos
 				.FirstOrDefaultAsync(m => m.ProductoId == id);
 			if (productos == null)
 			{
-				return NotFound();
+				TempData["Error"] = "Registro no encontrado.";
+				return RedirectToAction(nameof(Index));
 			}
 
 			//return View(productos);
 			productos.Inactivo = true;
 			_context.Update(productos);
 			await _context.SaveChangesAsync();
+
+			TempData["Success"] = "Registro eliminado correctamente.";
 
 			return RedirectToAction("Index");
 		}

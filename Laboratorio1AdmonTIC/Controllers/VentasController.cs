@@ -63,29 +63,47 @@ namespace Laboratorio1AdmonTIC.Controllers
 
         public async Task<IActionResult> DetailsPartial(Guid id)
         {
-            //Console.WriteLine($"Producto con ID {id} no encontrado");
             var venta = (from ve in _context.Ventas
                          join cl in _context.Clientes on ve.ClienteId equals cl.ClienteId
                          join em in _context.Empleados on ve.EmpleadosId equals em.EmpleadosId
                          join mepa in _context.MetodosPago on ve.MetodoId equals mepa.MetodoId
-                         where !ve.Inactivo && ve.VentasId == id
+                         where ve.VentasId == id
                          select new VentaViewModel
-                          {
-                            VentasId = ve.ClienteId,
-                            Cliente = cl.Nombres + ' ' + cl.Apellidos,
-                            Empleado = em.Nombres + ' ' + em.Apellidos,
-                            TipoPago = mepa.TipoPago,
-                            FechaVenta = ve.FechaVenta,
-                            Total = ve.Total
-                          }).FirstOrDefault();
+                         {
+                             VentasId = ve.VentasId,
+                             Cliente = cl.Nombres + ' ' + cl.Apellidos,
+                             Empleado = em.Nombres + ' ' + em.Apellidos,
+                             TipoPago = mepa.TipoPago,
+                             FechaVenta = ve.FechaVenta,
+                             Total = ve.Total
+                         }).FirstOrDefault();
 
             if (venta == null)
             {
                 return NotFound();
             }
 
-            return PartialView("Details", venta);
+            var detalles = (from dv in _context.DetallesVenta
+                            join pr in _context.Productos on dv.ProductoId equals pr.ProductoId
+                            where dv.VentasId == id
+                            select new DetallesVentasViewModel
+                            {
+                                productoId = pr.ProductoId,
+                                Producto = pr.Nombre,
+                                Cantidad = dv.Cantidad,
+                                PrecioUnitario = dv.PrecioUnitario,
+                                Total = dv.Total
+                            }).ToList();
+
+            var viewModel = new DetallesVViewModel
+            {
+                Venta = venta,
+                Detalles = detalles
+            };
+
+            return PartialView("Details", viewModel);
         }
+
 
         // GET: Ventas/Create
         public IActionResult Create()
@@ -93,6 +111,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
             ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
             ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
+            ViewBag.Producto = _context.Productos.Where(p => !p.Inactivo).ToList();
             return View();
         }
 
@@ -101,20 +120,97 @@ namespace Laboratorio1AdmonTIC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VentasId,ClienteId,EmpleadosId,MetodoId,FechaVenta,Total")] Ventas ventas)
+        public async Task<IActionResult> Create(DetallesInsertVentasViewModel model)
         {
             if (ModelState.IsValid)
             {
-                ventas.VentasId = Guid.NewGuid();
-                _context.Add(ventas);
+                model.Ventas.VentasId = Guid.NewGuid();
+                model.Ventas.FechaVenta = DateTime.Now;
+                _context.Add(model.Ventas);
+
+
                 await _context.SaveChangesAsync();
+
+                Guid idVenta = model.Ventas.VentasId;
+                Guid tipoMovimientoIngresoId = Guid.Parse("2519078B-66EF-44A8-9D25-5D0D3FF95B15");
+
+
+                // Validar primero el stock de todos los productos
+                foreach (var detalle in model.DetallesVentas)
+                {
+                    var producto = await _context.Productos.FindAsync(detalle.ProductoId);
+                    if (producto == null)
+                    {
+                        TempData["Error"] = $"Producto con ID {detalle.ProductoId} no encontrado.";
+                        //ModelState.AddModelError("", $"Producto con ID {detalle.ProductoId} no encontrado.");
+                        return RedirectToAction(nameof(Create));
+                    }
+
+                    if (detalle.Cantidad > producto.Stock)
+                    {
+                        //ModelState.AddModelError("", $"No hay suficiente stock para el producto '{producto.Nombre}'. Stock disponible: {producto.Stock}, solicitado: {detalle.Cantidad}.");
+                        TempData["Warning"] = $"No hay suficiente stock para el producto '{producto.Nombre}'. Stock disponible: {producto.Stock}, solicitado: {detalle.Cantidad}.";
+                        // Cargar ViewBags antes de retornar
+                        ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+                        ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+                        ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
+                        ViewBag.Producto = _context.Productos.Where(p => !p.Inactivo).ToList();
+                        return RedirectToAction(nameof(Create));
+                    }
+                }
+
+
+                //model.Ventas.VentasId = Guid.NewGuid();
+                //_context.Add(model.Ventas);
+                //await _context.SaveChangesAsync();
+
+
+                
+
+                foreach (var detalle in model.DetallesVentas)
+                {
+                    //Console.WriteLine($"ProductoId: {detalle.ProductoId}, Cantidad: {detalle.Cantidad}, Precio: {detalle.PrecioUnitario}, Subtotal: {detalle.Total}");
+
+                    detalle.DetalleVentaId = Guid.NewGuid();
+                    detalle.VentasId = idVenta;
+                    _context.DetallesVenta.Add(detalle);
+
+                    var invent = new Inventario
+                    {
+                        MovimientoId = Guid.NewGuid(),
+                        ProductoId = detalle.ProductoId,
+                        TipoMovimientoId = tipoMovimientoIngresoId,
+                        EmpleadosId = model.Ventas.EmpleadosId,
+                        Cantidad = detalle.Cantidad,
+                        FechaCompra = DateTime.Now,
+                        VentaId = idVenta,
+                        Inactivo = false
+                    };
+                    _context.Inventario.Add(invent);
+
+                    var producto = await _context.Productos.FindAsync(detalle.ProductoId);
+                    if (producto != null)
+                    {
+                        producto.Stock -= detalle.Cantidad;
+                        _context.Productos.Update(producto);
+                    }
+                    else
+                    {
+                        TempData["Error"] = $"Producto con ID {detalle.ProductoId} no encontrado para actualizar stock.";
+                    }
+                }
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Venta realizada exitosamente.";
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
             ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
             ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
-            return View(ventas);
+            ViewBag.Producto = _context.Productos.Where(p => !p.Inactivo).ToList();
+            TempData["Error"] = "Algo fallo, vuelve a ingresar los datos.";
+            return RedirectToAction(nameof(Create));
         }
+
 
         // GET: Ventas/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -124,15 +220,46 @@ namespace Laboratorio1AdmonTIC.Controllers
                 return NotFound();
             }
 
-            var ventas = await _context.Ventas.FindAsync(id);
-            if (ventas == null)
+            var ventaPrincipal = await _context.Ventas.FindAsync(id);
+
+            var detalles = await (from dc in _context.DetallesVenta
+                                  join p in _context.Productos on dc.ProductoId equals p.ProductoId
+                                  where dc.VentasId == id
+                                  select new DetallesVentasViewModel
+                                  {
+                                      DetalleVentaId = dc.DetalleVentaId,
+                                      Producto = p.Nombre,
+                                      productoId = dc.ProductoId,
+                                      Cantidad = dc.Cantidad,
+                                      PrecioUnitario = dc.PrecioUnitario,
+                                      Total = dc.Total
+                                  }).ToListAsync();
+
+            if (ventaPrincipal == null)
             {
                 return NotFound();
             }
+
+            var vm = new VentaConDetallesViewModel
+            {
+                ventaId = ventaPrincipal.VentasId,
+                Ventas = new Ventas
+                {
+                    ClienteId = ventaPrincipal.ClienteId,
+                    EmpleadosId = ventaPrincipal.EmpleadosId,
+                    FechaVenta = ventaPrincipal.FechaVenta,
+                    Total = ventaPrincipal.Total,
+                    MetodoId = ventaPrincipal.MetodoId
+                    
+                },
+                Detalles = detalles
+            };
+
             ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
             ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
             ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
-            return View(ventas);
+            ViewBag.Producto = _context.Productos.Where(p => !p.Inactivo).ToList();
+            return View(vm);
         }
 
         // POST: Ventas/Edit/5
@@ -174,27 +301,68 @@ namespace Laboratorio1AdmonTIC.Controllers
         }
 
         // GET: Ventas/Delete/5
+       
+
+
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var ventas = await _context.Ventas
                 .FirstOrDefaultAsync(m => m.VentasId == id);
             if (ventas == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
-            //return View(ventas);
+            //return View(compras);
             ventas.Inactivo = true;
-            _context.Update(ventas);
-            await _context.SaveChangesAsync();
 
+            var detallesc = await _context.DetallesVenta
+                .Where(dc => dc.VentasId == id)
+                .ToListAsync();
+
+            List<Productos> productosAActualizar = new List<Productos>();
+
+            foreach (var detalle in detallesc)
+            {
+                detalle.Inactivo = true;
+
+                var productos = await _context.Productos
+                    .FirstOrDefaultAsync(p => p.ProductoId == detalle.ProductoId);
+                if (productos != null)
+                {
+                    productos.Stock += detalle.Cantidad;
+                    productosAActualizar.Add(productos);
+                }
+                else {
+                    TempData["Warning"] = $"Producto con ID {detalle.ProductoId} no encontrado al eliminar.";
+                }
+            }
+
+            var inventari = await _context.Inventario
+                    .Where(i => i.VentaId == id)
+                    .ToListAsync();
+            foreach (var invent in inventari)
+            {
+                invent.Inactivo = true;
+            }
+
+            _context.Update(ventas);
+            _context.UpdateRange(detallesc);
+            _context.UpdateRange(inventari);
+            _context.UpdateRange(productosAActualizar);
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Registro eliminado correctamente.";
             return RedirectToAction("Index");
         }
+
 
         // POST: Ventas/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -215,5 +383,147 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             return _context.Ventas.Any(e => e.VentasId == id);
         }
+
+        [HttpGet]
+        public IActionResult ObtenerPrecio(Guid idProducto)
+        {
+            var producto = _context.Productos
+                .FirstOrDefault(p => p.ProductoId == idProducto);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            return Json(new { precio = producto.PrecioVenta });
+        }
+
+        [HttpGet]
+        public IActionResult ObtenerStock(Guid idProducto)
+        {
+            var producto = _context.Productos
+                .FirstOrDefault(p => p.ProductoId == idProducto);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            return Json(new { stock = producto.Stock });
+        }
+
+
+        public async Task<IActionResult> Anulados()
+        {
+            //Console.WriteLine($"Producto con ID {id} no encontrado");
+
+            var ventaA = await (
+                from c in _context.Ventas
+                join p in _context.Clientes on c.ClienteId equals p.ClienteId
+                join e in _context.Empleados on c.EmpleadosId equals e.EmpleadosId
+                join mp in _context.MetodosPago on c.MetodoId equals mp.MetodoId
+                where c.Inactivo
+                select new VentaViewModel
+                {
+                    VentasId = c.VentasId,
+                    Cliente = p.Nombres,
+                    Empleado = e.Nombres + " " + e.Apellidos,
+                    FechaVenta = c.FechaVenta,
+                    Total = c.Total,
+                    TipoPago = mp.TipoPago
+                }).ToListAsync();
+
+            if (!ventaA.Any())
+            {
+                return NotFound();
+            }
+
+            return PartialView("_TablaAnulados", ventaA);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateDos(VentaConDetallesViewModel model)
+        {
+            Console.WriteLine("TOTAL:-------->" + model.Ventas.Total);
+            Console.WriteLine("SUBTOTAL:-------->" + model.Subtotal);
+            if (ModelState.IsValid)
+            {
+                model.Ventas.VentasId = Guid.NewGuid();
+                model.Ventas.FechaVenta = DateTime.Now;
+                _context.Add(model.Ventas);
+                //TipoMovimientoId Ingreso --> 9E1EA92E-D21A-4E54-9A44-40947ECFFB5A
+
+                await _context.SaveChangesAsync();
+
+                Guid idVenta = model.Ventas.VentasId;
+                Guid tipoMovimientoIngresoId = Guid.Parse("2519078B-66EF-44A8-9D25-5D0D3FF95B15");
+
+                foreach (var detalle in model.Detalles)
+                {
+                    var detalleVenta= new DetallesVenta
+                    {
+                        DetalleVentaId = Guid.NewGuid(),
+                        VentasId = idVenta,
+                        ProductoId = detalle.productoId,
+                        Cantidad = detalle.Cantidad,
+                        PrecioUnitario = detalle.PrecioUnitario,
+                        Total = detalle.Total
+                    };
+
+                    _context.DetallesVenta.Add(detalleVenta);
+
+                    var invent = new Inventario
+                    {
+                        MovimientoId = Guid.NewGuid(),
+                        ProductoId = detalle.productoId,
+                        TipoMovimientoId = tipoMovimientoIngresoId,
+                        EmpleadosId = model.Ventas.EmpleadosId,
+                        Cantidad = detalle.Cantidad,
+                        FechaCompra = DateTime.Now,
+                        VentaId = idVenta,
+                        Inactivo = false
+                    };
+                    _context.Inventario.Add(invent);
+
+                    var producto = await _context.Productos.FindAsync(detalle.productoId);
+                    if (producto != null)
+                    {
+                        producto.Stock -= detalle.Cantidad;
+                        _context.Productos.Update(producto);
+                    }
+                    else
+                    {
+                        TempData["Warning"] = $"Producto con ID {detalle.productoId} no encontrado para actualizar stock.";
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Venta y detalles agregados correctamente.";
+                return RedirectToAction(nameof(Index));
+            }
+            if (!ModelState.IsValid)
+            {
+                foreach (var modelState in ModelState)
+                {
+                    foreach (var error in modelState.Value.Errors)
+                    {
+                        Console.WriteLine($"Campo: {modelState.Key}, Error: {error.ErrorMessage}");
+                    }
+                }
+
+                TempData["Error"] = "Datos inválidos al intentar crear la venta.";
+                return RedirectToAction("Edit", new { id = model.ventaId });
+            }
+            ViewBag.Clientes = new SelectList(_context.Clientes.Where(e => !e.Inactivo).Select(e => new { Id = e.ClienteId, Cliente = e.Nombres + " " + e.Apellidos }), "Id", "Cliente");
+            ViewBag.Empleados = new SelectList(_context.Empleados.Where(e => !e.Inactivo).Select(e => new { Id = e.EmpleadosId, Empleado = e.Nombres + " " + e.Apellidos }), "Id", "Empleado");
+            ViewBag.MetodoPago = new SelectList(_context.MetodosPago.Where(p => !p.Inactivo), "MetodoId", "TipoPago");
+            ViewBag.Producto = _context.Productos.Where(p => !p.Inactivo).ToList();
+            TempData["Error"] = "Ocurrió un error inesperado.";
+            return RedirectToAction(nameof(Create));
+        }
+
+
     }
 }

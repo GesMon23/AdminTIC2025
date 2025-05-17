@@ -1,4 +1,6 @@
-﻿(function($) {
+﻿console.log("alert.js cargado correctamente");
+
+(function ($) {
     showSwal = function (type, nombre, deleteUrl) {
         if (type === 'confirm-delete') {
             swal({
@@ -140,11 +142,78 @@ function confirmarEliminacion(event, url) {
     });
 }
 
-function mostrarErrorDesdeTempData(mensaje) {
+function confirmarRestauracion(event, url) {
+    event.preventDefault(); // evitar navegación directa
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción restaurará el registro y sus dependencias.',
+        icon: 'question',
+        background: '#222437',
+        color: '#adadb8',
+        customClass: {
+            icon: 'mt-5 mb-0',
+            confirmButton: 'btn btn-inverse-info btn-fw',
+            cancelButton: 'btn btn-inverse-secondary btn-fw'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Restaurar',
+        cancelButtonText: 'Cancelar',
+        //input: 'password',  // Campo para ingresar la contraseña
+
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = url;
+        }
+    });
+}
+
+//function mostrarErrorDesdeTempData(mensaje) {
+//    if (mensaje && mensaje !== '') {
+//        Swal.fire({
+//            title: 'Advertencia',
+//            text: mensaje,
+//            footer: '¡No fue posible ejecutar la acción!',
+//            icon: 'info',
+//            background: '#222437',
+//            color: '#adadb8',
+//            confirmButtonText: 'Entendido',
+//            customClass: {
+//                icon: 'mt-5 mb-0',
+//                confirmButton: 'btn btn-inverse-info btn-fw'
+//            }
+//        });
+//    }
+//}
+
+function errorLogin(mensaje) {
     if (mensaje && mensaje !== '') {
         Swal.fire({
-            title: 'Advertencia',
+            icon: 'error',
+            title: 'Login inválido',
             text: mensaje,
+            background: '#222437',
+            color: '#adadb8',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+    
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const body = document.body;
+    const successMessage = body.dataset.success;
+    const errorMessage = body.dataset.error;
+    const warningMessage = body.dataset.warning;
+    const infoMessage = body.dataset.info;
+    const errorEmpleado = body.dataset.errorempleado;
+
+    if (errorEmpleado) {
+        Swal.fire({
+            title: 'Advertencia',
+            text: successMessage,
             footer: '¡No fue posible ejecutar la acción!',
             icon: 'info',
             background: '#222437',
@@ -156,23 +225,55 @@ function mostrarErrorDesdeTempData(mensaje) {
             }
         });
     }
-}
 
-function errorLogin(mensaje) {
-    if (mensaje && mensaje !== '') {
+
+
+    if (successMessage) {
         Swal.fire({
-            icon: 'error',
-            title: 'Login inválido',
-            text: mensaje,
+            position: "top-end",
+            icon: "success", 
+            title: '¡Éxito!',
+            text: successMessage,
             background: '#222437',
-            color: '#adadb8',
-            confirmButtonText: 'Entendido',
-            customClass: {
-                icon: 'mt-5 mb-0',
-                confirmButton: 'btn btn-inverse-danger btn-fw'
-            }
+            color: '#fff',
+            showConfirmButton: false,
+            timer: 2000
         });
     }
-    
-}
 
+    if (errorMessage) {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: errorMessage,
+            background: '#222437',
+            color: '#fff',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+
+    if (warningMessage) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: warningMessage,
+            background: '#222437',
+            color: '#fff',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+
+    if (infoMessage) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Información',
+            text: infoMessage,
+            background: '#222437',
+            color: '#fff',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+});

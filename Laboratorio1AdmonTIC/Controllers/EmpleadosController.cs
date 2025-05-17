@@ -113,11 +113,13 @@ namespace Laboratorio1AdmonTIC.Controllers
                 empleados.EmpleadosId = Guid.NewGuid();
                 _context.Add(empleados);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+				TempData["Success"] = "Empleado registrado correctamente.";
+				return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName", empleados.UserId);
-            return View(empleados);
-        }
+			TempData["Error"] = "Ocurrio un error al guardar.";
+			return RedirectToAction(nameof(Create));
+		}
 
         // GET: Empleados/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -152,7 +154,8 @@ namespace Laboratorio1AdmonTIC.Controllers
 
             if (id != empleados.EmpleadosId)
             {
-                return NotFound();
+                TempData["Error"] = "Ocurrio un error al actualizar.";
+                return RedirectToAction(nameof(Edit), new { id = id });
             }
 
             if (ModelState.IsValid)
@@ -166,17 +169,20 @@ namespace Laboratorio1AdmonTIC.Controllers
                 {
                     if (!EmpleadosExists(empleados.EmpleadosId))
                     {
-                        return NotFound();
+                        TempData["Error"] = "Ocurrio un error al actualizar.";
+                        return RedirectToAction(nameof(Edit), new { id = id });
                     }
                     else
                     {
                         throw;
                     }
                 }
+                TempData["Success"] = "Empleado actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Set<IdentityUser>(), "Id", "UserName", empleados.UserId);
-            return View(empleados);
+            TempData["Error"] = "Modelo invalido (faltan datos).";
+            return RedirectToAction(nameof(Edit), new { id = id });
         }
 
         // GET: Empleados/Delete/5
@@ -184,14 +190,16 @@ namespace Laboratorio1AdmonTIC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Error"] = "Id no válido.";
+                return RedirectToAction(nameof(Index));
             }
 
             var empleados = await _context.Empleados
                 .FirstOrDefaultAsync(m => m.EmpleadosId == id);
             if (empleados == null)
             {
-                return NotFound();
+                TempData["Error"] = "Registro no encontrado.";
+                return RedirectToAction(nameof(Index));
             }
 
             //return View(empleados);
@@ -199,6 +207,7 @@ namespace Laboratorio1AdmonTIC.Controllers
             _context.Update(empleados);
             await _context.SaveChangesAsync();
 
+            TempData["Success"] = "Registro eliminado correctamente.";
             return RedirectToAction("Index");
         }
 
