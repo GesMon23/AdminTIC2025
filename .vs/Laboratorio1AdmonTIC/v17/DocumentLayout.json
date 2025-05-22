@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\views\\shared\\_loginlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\shared\\_loginlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\views\\users\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|c:\\users\\juare\\desktop\\escritoriocarpetas\\noveno semestre\\adminitracion de tecnolog\u00EDas\\proyectosgit\\admintic2025\\laboratorio1admontic\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{08B602CB-EEF1-4CD1-9987-B696E4DB0C40}|Laboratorio1AdmonTIC\\Laboratorio1AdmonTIC.csproj|solutionrelative:laboratorio1admontic\\areas\\identity\\pages\\account\\logout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,54 +46,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\ViewModels\\DashboardViewModel.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\ViewModels\\DashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\ViewModels\\DashboardViewModel.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\ViewModels\\DashboardViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-17T19:36:37.358Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAuwBEAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-17T19:34:24.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAANQBAAAAAAAAAAAAANwBAAAPAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAB/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-17T17:29:45.627Z",
+              "WhenOpened": "2025-05-22T20:20:54.728Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAAAJQAAAApAAAA",
+              "DocumentIndex": 1,
+              "Title": "_LoginLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Shared\\_LoginLayout.cshtml",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Shared\\_LoginLayout.cshtml",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Shared\\_LoginLayout.cshtml",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Shared\\_LoginLayout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAB/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-17T02:55:18.448Z",
+              "WhenOpened": "2025-05-22T20:20:10.033Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T02:19:07.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Program.cs",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Program.cs",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Program.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T02:15:11.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Logout.cshtml",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T02:04:53.051Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Users\\Index.cshtml",
+              "RelativeDocumentMoniker": "Laboratorio1AdmonTIC\\Views\\Users\\Index.cshtml",
+              "ToolTip": "C:\\Users\\juare\\Desktop\\EscritorioCarpetas\\Noveno Semestre\\Adminitracion de Tecnolog\u00EDas\\ProyectosGit\\AdminTIC2025\\Laboratorio1AdmonTIC\\Views\\Users\\Index.cshtml",
+              "RelativeToolTip": "Laboratorio1AdmonTIC\\Views\\Users\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T00:54:11.982Z",
               "EditorCaption": ""
             }
           ]

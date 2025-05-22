@@ -1,6 +1,8 @@
 using Laboratorio1AdmonTIC.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
-//ConexionSomee
+//ConesionSomeDos
 //ConexionLocal
-var connectionString = builder.Configuration.GetConnectionString("ConexionLocal") ?? throw new InvalidOperationException("Connection string 'ConexionDesar' not found.");
+var connectionString = builder.Configuration.GetConnectionString("ConesionSomeDos") ?? throw new InvalidOperationException("Connection string 'ConexionDesar' not found.");
 
 
 builder.Services.AddDbContext<ERPDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Transient);
@@ -19,6 +21,8 @@ builder.Services.AddDbContext<ERPDbContext>(options => options.UseSqlServer(conn
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ERPDbContext>();
 
 builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ERPDbContext>();
+
+
 
 var app = builder.Build();
 

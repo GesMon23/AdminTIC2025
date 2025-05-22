@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
 using Laboratorio1AdmonTIC.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
-    public class ProveedoresController : Controller
+	[Authorize]
+	public class ProveedoresController : Controller
     {
         private readonly ERPDbContext _context;
 

@@ -31,19 +31,23 @@
                             {
                                 <tr>
                                     <td>
-                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@user.Id">
+                                        <a type="button" class="btn btn-inverse-warning me-2 py-2 px-3" asp-action="Edit" asp-route-id="@user.Id" data-toggle="tooltip" title="Editar">
                                             <i class="mdi mdi-pencil"></i>
                                             @* Editar *@
                                         </a>
 
-                                        <a type="button" class="btn btn-inverse-info me-2 py-2 px-3" asp-action="Details" asp-route-id="@user.Id">
+                                       @*  <a type="button" class="btn btn-inverse-info me-2 py-2 px-3" asp-action="Details" asp-route-id="@user.Id">
                                             <i class="mdi mdi-note-text"></i>
-                                            @* Detalles *@
+                                            Detalles 
+                                        </a> *@
+                                        <a asp-controller="Users" asp-action="CambiarPassword" asp-route-id="@user.Id" type="button" class="btn btn-inverse-primary me-2 py-2 px-3" data-toggle="tooltip" title="Cambiar Contraseña">
+                                            <i class="mdi mdi-alert-outline"></i>
                                         </a>
+
 
                                         <a href="@Url.Action("Delete", new { id = user.Id })"
                                            class="btn btn-inverse-danger me-2 py-2 px-3"
-                                           onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = user.Id })')">
+                                           onclick="confirmarEliminacion(event, '@Url.Action("Delete", new { id = user.Id })')" data-toggle="tooltip" title="Eliminar">
                                             <i class="mdi mdi-delete"></i>
                                             @* Eliminar *@
                                         </a>
@@ -61,3 +65,12 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+}

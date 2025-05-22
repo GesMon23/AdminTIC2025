@@ -880,3 +880,7 @@ C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecno
 C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\obj\Debug\net8.0\Laboratorio1AdmonTIC.genruntimeconfig.cache
 C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\obj\Debug\net8.0\ref\Laboratorio1AdmonTIC.dll
 C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\obj\Debug\net8.0\scopedcss\Views\Shared\_LoginLayout.cshtml.rz.scp.css
+C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\bin\Debug\net8.0\EPPlus.dll
+C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\bin\Debug\net8.0\EPPlus.Interfaces.dll
+C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\bin\Debug\net8.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\juare\Desktop\EscritorioCarpetas\Noveno Semestre\Adminitracion de Tecnologías\ProyectosGit\AdminTIC2025\Laboratorio1AdmonTIC\bin\Debug\net8.0\EPPlus.System.Drawing.dll

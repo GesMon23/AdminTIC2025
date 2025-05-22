@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
 using Laboratorio1AdmonTIC.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
-    public class EmpleadosController : Controller
+	[Authorize]
+	public class EmpleadosController : Controller
     {
         private readonly ERPDbContext _context;
 

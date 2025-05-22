@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Laboratorio1AdmonTIC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Laboratorio1AdmonTIC.Controllers
 {
-    public class TiposMovimientoesController : Controller
+	[Authorize]
+	public class TiposMovimientoesController : Controller
     {
         private readonly ERPDbContext _context;
 

@@ -1,6 +1,336 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@using System.Globalization
+@model Laboratorio1AdmonTIC.ViewModels.EstadisticasViewModel
+
+@{
+    ViewData["Title"] = "Estadisticas Generales";
+    var colorVentas = Model.difVentas < 0 ? "text-danger" : "text-success";
+    var iconVentas = Model.difVentas < 0 ? "mdi-menu-down" : "mdi-menu-up";
+
+    var colorUnidades = Model.difUvendidas < 0 ? "text-danger" : "text-success";
+    var iconUnidades = Model.difUvendidas < 0 ? "mdi-menu-down" : "mdi-menu-up";
+
+    var colorNumVentas = Model.difNumeroVentas < 0 ? "text-danger" : "text-success";
+    var iconNumVentas = Model.difNumeroVentas < 0 ? "mdi-menu-down" : "mdi-menu-up";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="home-tab">
+            <div class="tab-content tab-content-basic">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="statistics-details d-flex align-items-center justify-content-between">
+                                <div class="d-none d-md-block">
+                                    <p class="statistics-title">Producto más vendido</p>
+                                    <h3 class="rate-percentage">@Model.MasVendido.productoVendido</h3>
+                                    <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i></p>
+                                </div>
+                                <div>
+                                    <p class="statistics-title">Ventas del Mes</p>
+                                    <h3 class="rate-percentage">Q @Model.totalVentas</h3>
+                                    <p class="@colorVentas d-flex"><i class="mdi @iconVentas"></i><span>@Model.difVentas%</span></p>
+                                </div>
+                                <div>
+                                    <p class="statistics-title">Unidades Vendidas</p>
+                                    <h3 class="rate-percentage">@Model.unidadesVendidas</h3>
+                                    <p class="@colorUnidades d-flex"><i class="mdi @iconUnidades"></i><span>@Model.difUvendidas%</span></p>
+                                </div>
+                                <div>
+                                    <p class="statistics-title">Número de Ventas</p>
+                                    <h3 class="rate-percentage">@Model.numeroVentas</h3>
+                                    <p class="@colorNumVentas d-flex"><i class="mdi @iconNumVentas"></i><span>@Model.difNumeroVentas%</span></p>
+                                </div>
+                                <div class="d-none d-md-block">
+                                    <p class="statistics-title">Empleado Vendendor</p>
+                                    <h3 class="rate-percentage">@Model.MasVendido.empleado</h3>
+                                    <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ventas por Mes</h4>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Productos más Vendido por Mes</h4>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Comparativa de Metodos de Pago</h4>
+                <div class="table-responsive">
+                    <table id="tablaMetodos" class="table">
+                        <thead>
+                            <tr>
+                                <th>Método de Pago</th>
+                                <th>Porcentaje de uso (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Comparación Compras vs Ventas del mes</h4>
+                <canvas id="barDoble"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* REPORTES *@
+<h1>Reportes</h1>
+
+<div class="row">
+    @* REPORTE VENTAS *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/1.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de ventas</h4>
+                <div class="form-group">
+                    <label>Desde:</label>
+                    <input type="date" class="form-control mb-2" id="fechaInicio">
+                    <label>Hasta:</label>
+                    <input type="date" class="form-control mb-3" id="fechaFin">
+                </div>
+                <button onclick="exportarExcel()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    @* REPORTE COMPRAS *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/2.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de compras</h4>
+
+                <div class="form-group">
+                    <label>Desde:</label>
+                    <input type="date" class="form-control mb-2" id="fechaInicioC">
+
+                    <label>Hasta:</label>
+                    <input type="date" class="form-control mb-3" id="fechaFinC">
+                </div>
+
+                <button onclick="exportarExcelCompras()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    @* REPORTE MOVIEMIENTOS DE INVENTARIO *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/4.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de movimientos de inventario</h4>
+
+                <div class="form-group">
+                    <label>Desde:</label>
+                    <input type="date" class="form-control mb-2" id="fechaInicioM">
+
+                    <label>Hasta:</label>
+                    <input type="date" class="form-control mb-3" id="fechaFinM">
+
+                    <label for="movimiento">Movimiento:</label>
+                    <select style="height: 50px;" class="form-control" id="movimientoM" name="movimientoM">
+                        <option value="">-- Selecciona un tipo --</option>
+                        <option value="Ingreso">Ingreso</option>
+                        <option value="Egreso">Egreso</option>
+                    </select>
+                </div>
+                <button onclick="exportarExcelMovimientos()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    @* REPORTE INVENTARIO *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/3.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de inventario</h4>
+
+                <button onclick="exportarExcelInventario()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    @* REPORTE PRODUCTOS BAJO STOCK *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/5.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de productos con bajo stock</h4>
+
+                <button onclick="exportarExcelBajoStock()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    @* REPORTE DE RENTABILIDAD *@
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 d-flex flex-column">
+            <img class="card-img-top" src="~/images/samples/300x300/5.png" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title mt-3">Reporte de rentabilidad por producto</h4>
+
+                <div class="form-group">
+                    <label>Desde:</label>
+                    <input type="date" class="form-control mb-2" id="fechaInicioR">
+
+                    <label>Hasta:</label>
+                    <input type="date" class="form-control mb-3" id="fechaFinR">
+                </div>
+
+                <button onclick="exportarExcelRentabilidad()" class="btn btn-outline-info btn-icon-text">
+                    Exportar
+                    <i class="ti-file btn-icon-append"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function exportarExcel() {
+            const inicio = document.getElementById("fechaInicio").value;
+            const fin = document.getElementById("fechaFin").value;
+            if (!inicio || !fin) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    title: 'Información',
+                    text: 'Selecciona un rango de fechas.',
+                    background: '#222437',
+                    color: '#fff',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            window.location.href = `/Home/ExportarVentasExcel?fechaInicio=${inicio}&fechaFin=${fin}`;
+        }
+    </script>
+    <script>
+        function exportarExcelCompras() {
+            const inicio = document.getElementById("fechaInicioC").value;
+            const fin = document.getElementById("fechaFinC").value;
+            if (!inicio || !fin) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    title: 'Información',
+                    text: 'Selecciona un rango de fechas.',
+                    background: '#222437',
+                    color: '#fff',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            window.location.href = `/Home/ReporteCompras?fechaInicio=${inicio}&fechaFin=${fin}`;
+        }
+    </script>
+    <script>
+        function exportarExcelInventario() {
+            window.location.href = `/Home/ReporteInventario`;
+        }
+    </script>
+    <script>
+        function exportarExcelMovimientos() {
+            const inicio = document.getElementById("fechaInicioM").value;
+            const fin = document.getElementById("fechaFinM").value;
+            const movimientoInventario = document.getElementById("movimientoM").value;
+            if (!inicio || !fin) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    title: 'Información',
+                    text: 'Selecciona un rango de fechas.',
+                    background: '#222437',
+                    color: '#fff',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            window.location.href = `/Home/ReporteMovimientos?fechaInicio=${inicio}&fechaFin=${fin}&movimiento=${movimientoInventario}`;
+        }
+    </script>
+    <script>
+        function exportarExcelBajoStock() {
+            window.location.href = `/Home/ReporteBajoStock`;
+        }
+    </script>
+    <script>
+        function exportarExcelRentabilidad() {
+            const inicio = document.getElementById("fechaInicioR").value;
+            const fin = document.getElementById("fechaFinR").value;
+            if (!inicio || !fin) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "warning",
+                    title: 'Información',
+                    text: 'Selecciona un rango de fechas.',
+                    background: '#222437',
+                    color: '#fff',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                return;
+            }
+
+            window.location.href = `/Home/ReporteRentabilidad?fechaInicio=${inicio}&fechaFin=${fin}`;
+        }
+    </script>
+}
